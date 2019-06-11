@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> Duy Truong|Front-end Developer </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+</head>
+<body ng-app ="myApp" ng-controller="myCtrl">
+    <select ng-model="selectperson" >
+        <option ng-repeat="employee in employees" value="{{employee.name}}" >{{employee.name}}</option>
+    </select>
+    the selected employee's address: {{selectperson}}
+    <table>
+        
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Adress</td>
+            </tr>
+            <tr ng-repeat ="employee in employees| limitTo:mylimit">
+                <td>{{employee.name}}</td>
+                <td>{{employee.address}}</td>
+            </tr>
+        </thead>
+    </table>
+  
+
+    <script src="angular.js" >
+    </script>
+</body>
+</html>
