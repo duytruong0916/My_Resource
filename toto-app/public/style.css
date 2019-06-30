@@ -1,0 +1,20 @@
+body {
+    background-color: rgb(88, 155, 155);
+}
+#todo-list {
+    width: 40%;
+    height:150px;
+    background-color: rgb(52, 81, 107);
+}
+input {
+    height: 30px;
+}
+button {
+    color: red;
+}
+li:hover {
+    text-decoration: line-through;
+    width: 40%;
+    background-color: rgb(27, 43, 56);
+    color: white;
+}
