@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 var bcrypt = require('bcryptjs');
+
 const carsSchema = new Schema({
     password: {type:String},
     title: { type:String },
@@ -8,7 +9,6 @@ const carsSchema = new Schema({
     year:  {type:Number },
     available: {type:Boolean,default: false }
 });
-mongoose.model('car',carsSchema );
 const car = module.exports =  mongoose.model('car',carsSchema );
 
 module.exports.getCarByTitle = function(title, callback){

@@ -1,13 +1,13 @@
 const express = require('express');
+const config = require('./config/database.js');
 const bodyParse = require('body-parser');
-const mongoose = require('mongoose');
+const mongoose = require('mongoose');            //connect to database
 const morgan = require('morgan');
-
-
-const app = express();  //set up express app
-app.use(morgan('dev'));
+const passport = require('passport');            //for user anthentication
+var cors = require('cors')                       //for the front-end to connect to the server
+const app = express();                           //set up express app
 //connect mongoose
-mongoose.connect('mongodb://localhost:27017/Store', {useNewUrlParser: true}, (err)=>{
+mongoose.connect(config.database, {useNewUrlParser: true}, (err)=>{
     if(err){
         console.log('ERROR WHEN CONNECTING: ' + err)
           }
@@ -16,11 +16,18 @@ mongoose.connect('mongodb://localhost:27017/Store', {useNewUrlParser: true}, (er
          }
 });
 mongoose.Promise= global.Promise;
-app.use(bodyParse.json());      //middleware for post method
+app.use(morgan('dev'));                          //morgan middleware 'for displaying the requests'
+app.use(cors());                                 //cors middleware
+app.use(bodyParse.json()); //bodypaser middleware
+
+
+
+app.use(passport.initialize());
+require('./config/passport')(passport);
 app.use(express.static(__dirname + '/public'));
-app.use('/api', require('./routes/api'));//Initialize routes
+app.use('/api', require('./routes/userapi'));//Initialize routes
 
 
 //listening for requests
-const PORT = process.env.PORT || 5000 ;
-app.listen(process.env.PORT ||5000, () => console.log(`Server started on PORT ${PORT}`));
+const PORT = process.env.PORT || 3000 ;
+app.listen(process.env.PORT ||3000, () => console.log(`Server started on PORT ${PORT}`));

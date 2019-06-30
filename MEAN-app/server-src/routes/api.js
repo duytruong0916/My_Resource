@@ -20,10 +20,11 @@ Router.post('/car', (req, res, next)=>{
         available: req.body.available
     });
     Car.addCar(newcar, (err, car)=>{
-    if(err) res.send('falied to create new car');
-    else res.send(newcar);
+    if(err) res.json({err:true, msg: "failed to create user"})
+    else res.json({err:false, msg: "user was created"})
       })
    });
+
 Router.put('/car/:id', (req, res,next)=>{
     Car.findByIdAndUpdate({_id: req.params.id}, req.body).then((car)=>res.send(car));
 });
