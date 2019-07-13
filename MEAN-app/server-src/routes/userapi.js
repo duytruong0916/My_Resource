@@ -1,6 +1,7 @@
 const User = require('../modules/user');
 const express = require('express');
 const router =  express.Router()
+
 const passport = require('passport');
 const config = require ('../config/database.js');
 const jwt = require('jsonwebtoken');

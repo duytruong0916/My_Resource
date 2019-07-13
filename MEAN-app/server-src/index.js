@@ -1,11 +1,12 @@
 const express = require('express');
+const app = express();                           //set up express app
 const config = require('./config/database.js');
 const bodyParse = require('body-parser');
 const mongoose = require('mongoose');            //connect to database
 const morgan = require('morgan');
 const passport = require('passport');            //for user anthentication
 var cors = require('cors')                       //for the front-end to connect to the server
-const app = express();                           //set up express app
+
 //connect mongoose
 mongoose.connect(config.database, {useNewUrlParser: true}, (err)=>{
     if(err){
@@ -18,15 +19,17 @@ mongoose.connect(config.database, {useNewUrlParser: true}, (err)=>{
 mongoose.Promise= global.Promise;
 app.use(morgan('dev'));                          //morgan middleware 'for displaying the requests'
 app.use(cors());                                 //cors middleware
-app.use(bodyParse.json()); //bodypaser middleware
+app.use(bodyParse.json());                      //bodypaser middleware
 
 
 
 app.use(passport.initialize());
 require('./config/passport')(passport);
 app.use(express.static(__dirname + '/public'));
-app.use('/api', require('./routes/userapi'));//Initialize routes
 
+app.use('/api', require('./routes/userapi'));   //Initialize routes
+app.use('/api', require('./routes/hmapi'));     //Initialize routes
+app.use('/uploads',express.static('uploads'));
 
 //listening for requests
 const PORT = process.env.PORT || 3000 ;
