@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../Services/auth.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -8,51 +8,50 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./narbar.component.css']
 })
 export class NarbarComponent implements OnInit {
-@Input() event;
-optionImage;
-public interval;
-public menuClass ={
-  "d-none": true,
-  "d-flex": false
-}
+  @Input() event;
+  optionImage;
+  public interval;
+  public menuClass = {
+    "d-none": true,
+    "d-flex": false
+  }
   constructor(private authservice: AuthService,
     private router: Router,
     private flashmessage: FlashMessagesService,
-  ) {}
-  enterMenuHandler(element){
-    switch(element)
-    {
+  ) { }
+  enterMenuHandler(element) {
+    switch (element) {
       case "plakat":
-      this.optionImage="assets/images/type3.png";
-      break
+        this.optionImage = "assets/images/type3.png";
+        break
       case "halfmoon":
-      this.optionImage="assets/images/type2.png";
-      break;
+        this.optionImage = "assets/images/type2.png";
+        break;
       case "crowntail":
-      this.optionImage="assets/images/type1.png";
-      break;
+        this.optionImage = "assets/images/type1.png";
+        break;
 
     }
     this.isMenuLook();
   }
-  leaveMenuHandler(){
-    this.interval = setInterval(()=>{
+  leaveMenuHandler() {
+    this.interval = setInterval(() => {
       this.isdone();
-    },1000)
+    }, 1000)
   }
-  isMenuLook(){
+  isMenuLook() {
     clearInterval(this.interval)
-    this.menuClass={
+    this.menuClass = {
       "d-none": false,
       "d-flex": true
     }
   }
-  isdone(){
-    this.menuClass={
-    "d-none": true,
-    "d-flex": false
+  isdone() {
+    this.menuClass = {
+      "d-none": true,
+      "d-flex": false
+    }
   }
-}
   onlogOut() {
     this.authservice.logOut();
     this.flashmessage.show('You are logged out', { cssClass: 'alert-success', timeout: 2000 });

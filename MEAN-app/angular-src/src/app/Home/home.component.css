@@ -1,9 +1,10 @@
+.container-fluid{
+  font-family: 'Montserrat', sans-serif;
+  color:black;
+}
 a{
   text-decoration: none;
   color: rgba(196, 32, 32, 0.781);
-}
-h2{
-  color: #deb887;
 }
 .cus-button{
   padding: 10px;
@@ -22,7 +23,7 @@ img{
 .cardlink{
   font-size: 20px;
   text-decoration: none;
-  color: rgba(92, 81, 81, 0.295);
+  color: black;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
   letter-spacing: 1px;

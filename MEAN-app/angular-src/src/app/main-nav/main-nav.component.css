@@ -1,17 +1,31 @@
-.sidenav-container {
+.sidenav-container{
+  font-family: 'Montserrat', sans-serif;
   height: 100%;
+  background-color: white;
+  font-size: 11px;
+  font-weight: 400;
+  z-index: 3;
 }
+.sidenav{
+  width:280px;
+  background-color: white;
 
-.sidenav {
-  width: 200px;
 }
+.sidenav.mat-toolbar {
+  width: 280px;
 
-.sidenav .mat-toolbar {
-  background: inherit;
 }
-
-.mat-toolbar.mat-primary {
+.mat-toolbar{
   position: sticky;
   top: 0;
   z-index: 1;
+  background-color: white;
+}
+.menu-shop{
+  margin-left: 50px;
+  font-weight: normal;
+  font-size: 11px;
+}
+.mat-backdrop{
+  position:fixed;
 }

@@ -52,6 +52,6 @@ import { MainNavComponent } from './main-nav/main-nav.component';
     BrowserAnimationsModule,
   ],
   providers: [ProductService, ValidateService, AuthService, AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

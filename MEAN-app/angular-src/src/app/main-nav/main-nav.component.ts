@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -9,11 +9,19 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent {
+public menu1;
+public menu2;
+public menu3;
 
+ public isToggle=false;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
+  @HostListener("window:scroll", [])
+  onSideNavScroll(event){
+     event.stopPropagation()
+   }
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 

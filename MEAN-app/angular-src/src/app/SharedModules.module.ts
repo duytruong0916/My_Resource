@@ -10,7 +10,8 @@ import {MatButtonModule,
         MatFormFieldModule,
         MatSelectModule,
         MatListModule,
-        MatExpansionModule} from '@angular/material';
+        MatExpansionModule,
+        MatDialogModule} from '@angular/material';
 
 const MaterialsModules = [MatButtonModule,
                           MatCheckboxModule,
@@ -23,7 +24,8 @@ const MaterialsModules = [MatButtonModule,
                           MatFormFieldModule,
                           MatSelectModule,
                           MatListModule,
-                          MatExpansionModule];
+                          MatExpansionModule,
+                          MatDialogModule];
 
 @NgModule({
   imports: [MaterialsModules],
