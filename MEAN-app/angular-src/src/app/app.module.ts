@@ -46,7 +46,7 @@ import { MainNavComponent } from './main-nav/main-nav.component';
     MyOwnCustomMaterialModule,
     HttpClientModule,
     FormsModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     FlashMessagesModule.forRoot(),
     BrowserAnimationsModule,
