@@ -5,19 +5,17 @@ import { Injectable } from '@angular/core';
 })
 export class ValidateService {
   constructor() { }
-validateRegister(user){
-  if(user.username ==undefined ||user.lastname ==undefined ||user.firstname ==undefined ||user.password ==undefined ||user.email ==undefined ||user.address ==undefined ||user.phone ==undefined)
-     {
-       return false;
-     }
-else
-  {
+  validateRegister(user) {
+    if (user.username == undefined || user.lastname == undefined || user.firstname == undefined || user.password == undefined || user.email == undefined || user.address == undefined || user.phone == undefined) {
+      return false;
+    }
+    else {
       return true;
+    }
   }
-}
-  validateEmail(email){
+  validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
-}
+  }
 }
 

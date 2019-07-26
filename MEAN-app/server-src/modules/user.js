@@ -6,19 +6,19 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     lastname: {type: String, require: true},
     firstname: {type: String, require: true},
-    username: {type:String, require:true},
     password: {type:String, require:true},
+    birthday: {type:String},
     address: {type:String},
     email: {type:String},
-    phone: {type:Number}
+    phone: {type:String}
 });
 
 const User = module.exports = mongoose.model('User', userSchema);
 module.exports.getUserbyID = function(id, callback){
     User.findById(id, callback);
 }
-module.exports.findUser = function(username, callback){
-    let query = {username: username};
+module.exports.findUser = function(email, callback){
+    let query = {email: email};
     User.findOne(query, callback);
 }
 module.exports.RegisterUser = function(newuser, callback){

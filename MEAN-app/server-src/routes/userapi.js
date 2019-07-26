@@ -11,7 +11,7 @@ router.get('/user/profile', passport.authenticate('jwt',{session:false}), (req,r
 })
 router.get('/user/:username', (req,res)=>{
 
-   User.findUser(req.params.username, (err, data)=>{
+   User.findUser(req.params.email, (err, data)=>{
         if(err) res.send(err);
         else res.send(data);
    })
@@ -21,27 +21,37 @@ router.post('/user/register', (req,res)=>{
     let newuser =  new User({
         lastname: req.body.lastname,
         firstname: req.body.firstname,
-        username: req.body.username,
         password: req.body.password,
         address: req.body.address,
         email: req.body.email,
-        phone: req.body.phone
+        phone: req.body.phone,
+        birthday: req.body.birthday
     })
-    User.RegisterUser(newuser, (err, newuser)=>{
-        if(err) res.json({err:true, msg: "failed to create user"})
-        else res.json({err:false, msg: "user was created"})
+    User.findOne({email: newuser.email},(err,data)=>{
+        if(err) res.send(err)
+        else if(!data)
+         {
+            User.RegisterUser(newuser, (err, newuser)=>{
+                if(err) res.json({err:true, msg: "Failed to create user"})
+                else res.json({err:false, msg: "User was successfully created"})
+            })  
+        }
+        else 
+        {
+            res.send({err:true, msg: "Email was used"})
+        }
     })
 })
 // Authentiticate request
 router.post('/user/authenticate', (req,res)=>{
-    const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
 
-    User.findUser(username, (err, user)=>
+    User.findUser(email, (err, user)=>
 {       if(err) res.send(err);
         if(!user) 
         {
-            res.json({success:false, msg: "user not found"});
+            res.json({success:false, msg: "email not found"});
         }
         else{
             User.comparePassword(password, user.password, (err,isMatch)=>{
@@ -53,8 +63,8 @@ router.post('/user/authenticate', (req,res)=>{
                 success: true,
                 token: 'Bearer ' + token,
                 user: {
-                         id: user._id,
-                         username: user.username,
+                         lastname: user.lastname,
+                         firstname: user.firstname,
                     }
             });
         }else

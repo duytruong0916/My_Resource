@@ -8,20 +8,18 @@ const passport = require('passport');            //for user anthentication
 var cors = require('cors')                       //for the front-end to connect to the server
 
 //connect mongoose
-mongoose.connect(config.database, {useNewUrlParser: true}, (err)=>{
+mongoose.connect(config.database, (err)=>{
     if(err){
         console.log('ERROR WHEN CONNECTING: ' + err)
           }
     else {
-        console.log('you are connected to the database server')
+        console.log('you are connected to the Mongoose database server')
          }
 });
 mongoose.Promise= global.Promise;
 app.use(morgan('dev'));                          //morgan middleware 'for displaying the requests'
 app.use(cors());                                 //cors middleware
 app.use(bodyParse.json());                      //bodypaser middleware
-
-
 
 app.use(passport.initialize());
 require('./config/passport')(passport);

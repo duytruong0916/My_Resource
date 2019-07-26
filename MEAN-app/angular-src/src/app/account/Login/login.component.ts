@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from  '../Services/auth.service';
+import {AuthService} from  '../../Services/auth.service';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from 'angular2-flash-messages';
+import { FormGroup, FormControl, Validators, FormControlName} from "@angular/forms";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   username:String;
   password:String;
+
+  ngOnInit() {
+
+
+  }
 
   constructor(private authservice: AuthService,
               private router: Router,
@@ -24,16 +31,14 @@ export class LoginComponent implements OnInit {
          if(data.success)
          {
            this.authservice.storeUserData(data.token, data.user);
-           this.flashmessage.show(`Hello ${this.username}! You are signed in`, {cssClass: 'alert-success', timeout: 4000 });
+           console.log("true")
          }
          else {
-           this.flashmessage.show(data.msg, {cssClass: 'alert-danger', timeout: 2000 });
+           console.log(data.msg)
            this.router.navigate(['login']);
          }
 
     })
-  }
-  ngOnInit() {
   }
 
 }

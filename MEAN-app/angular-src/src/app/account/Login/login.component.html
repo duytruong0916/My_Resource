@@ -1,0 +1,10 @@
+<mat-card>
+  <form  #loginform ="ngForm" >
+    <mat-form-field>
+      <input matInput type='email' placeholder="Email" ngModel #emailControl ='ngModel' email required >
+      <mat-error *ngIf="emailControl.invalid">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-card>

@@ -10,6 +10,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class NarbarComponent implements OnInit {
   @Input() event;
   optionImage;
+  option;
   public interval;
   public menuClass = {
     "d-none": true,
@@ -20,6 +21,7 @@ export class NarbarComponent implements OnInit {
     private flashmessage: FlashMessagesService,
   ) { }
   enterMenuHandler(element) {
+    this.option=element;
     switch (element) {
       case "plakat":
         this.optionImage = "assets/images/type3.png";
@@ -30,6 +32,9 @@ export class NarbarComponent implements OnInit {
       case "crowntail":
         this.optionImage = "assets/images/type1.png";
         break;
+      case "fighter":
+        this.optionImage = "assets/images/type3.png";
+         break;
 
     }
     this.isMenuLook();

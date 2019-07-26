@@ -19,7 +19,7 @@ router.post('/halfmoonInfo',upload.single('file'),(req,res,next)=>{
         name: req.body.name,
         description: req.body.description,
         price: req.body.price,
-        productImage: req.file.path
+        productImage: req.file.name
     })
     product.save()
     .then(result=>{
@@ -32,10 +32,7 @@ router.get('/halfmoonInfo', (req, res, next)=>{
     halfmoon.find({})
     .then(doc=>{
         console.log('From database', doc)
-        res.json({
-            success:  true,
-            product: doc
+        res.sendFile(doc[0].productImage)
         })
     })
-})
 module.exports = router;

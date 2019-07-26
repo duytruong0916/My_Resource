@@ -1,3 +1,16 @@
+
+@media screen and (max-width: 768px) {
+  .wrapper{
+   padding-top:2px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .wrapper{
+   padding-top:100px;
+  }
+}
+
+
 .container-fluid{
   font-family: 'Montserrat', sans-serif;
   color:black;
