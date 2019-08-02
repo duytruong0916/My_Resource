@@ -23,4 +23,7 @@
   font-weight: normal;
   font-size: 11px;
 }
-
+a{
+  text-decoration: none;
+  color: black;
+}

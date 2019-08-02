@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
+const validators = require('mongoose-unique-validator');
 var bcrypt = require('bcryptjs');
-const config = require ('../config/database.js');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -9,10 +9,11 @@ const userSchema = new Schema({
     password: {type:String, require:true},
     birthday: {type:String},
     address: {type:String},
-    email: {type:String},
-    phone: {type:String}
+    email: {type:String, require:true, unique:true},
+    phone: {type:String},
+    orders: {type:Array}
 });
-
+userSchema.plugin(validators);
 const User = module.exports = mongoose.model('User', userSchema);
 module.exports.getUserbyID = function(id, callback){
     User.findById(id, callback);

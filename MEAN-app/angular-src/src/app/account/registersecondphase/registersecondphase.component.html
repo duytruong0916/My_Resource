@@ -76,8 +76,10 @@
         </div>
         <div class="w-100 text-center mb-3">
           <mat-error *ngIf="isMissingField ==true">Please complete all fields</mat-error>
-          <mat-error *ngIf="isInvalidEmail ==true">Invald email</mat-error>
+          <mat-error *ngIf="isInvalidEmail ==true&&isMissingField ==false">Invald email</mat-error>
           <mat-error *ngIf="isPasswordMatched ==false">Passwords do not match</mat-error>
+          <mat-error *ngIf="isSuccessful&&isMissingField ==false&&isInvalidEmail ==false&&isPasswordMatched ==true">{{isCreatedMessage}}</mat-error>
+          <mat-error *ngIf="!isSuccessful&&isMissingField ==false&&isInvalidEmail ==false&&isPasswordMatched ==true">{{isCreatedMessage}}</mat-error>
         </div>
         <button class="button-form d-block mt-3" type="submit">CREATE ACCOUNT</button>
         <div class= "mt-2">Full details of your rights in relation to your data are set out in our Privacy notice <a href="#">here.</a></div>

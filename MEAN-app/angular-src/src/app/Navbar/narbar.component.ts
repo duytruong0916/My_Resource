@@ -1,16 +1,22 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { AuthService } from '../Services/auth.service';
+import { ProductService } from '../Services/product.service';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-narbar',
   templateUrl: './narbar.component.html',
   styleUrls: ['./narbar.component.css']
 })
-export class NarbarComponent implements OnInit {
+export class NarbarComponent implements OnInit, OnDestroy {
   @Input() event;
-  optionImage;
-  option;
+  public optionImage;
+  public selection;
+  public option;
+  public userAuthenticated: boolean = false;
+  public user_lastname: string;
+  public authListenerSubs: Subscription;
   public interval;
   public menuClass = {
     "d-none": true,
@@ -18,10 +24,21 @@ export class NarbarComponent implements OnInit {
   }
   constructor(private authservice: AuthService,
     private router: Router,
+    private productservice: ProductService,
     private flashmessage: FlashMessagesService,
-  ) { }
+  ) {}
+  ngOnInit() {
+    this.user_lastname = this.authservice.getUserlastname();
+    this.userAuthenticated = this.authservice.getIsAuthenticated();
+    this.authListenerSubs = this.authservice.getAuthStatusListener().subscribe(isAuthenticated => {
+      this.userAuthenticated = isAuthenticated;
+    })
+    this.authListenerSubs = this.authservice.getAuthNameListener().subscribe(lastname => {
+      this.user_lastname = lastname;
+    })
+  }
   enterMenuHandler(element) {
-    this.option=element;
+    this.option = element;
     switch (element) {
       case "plakat":
         this.optionImage = "assets/images/type3.png";
@@ -34,7 +51,7 @@ export class NarbarComponent implements OnInit {
         break;
       case "fighter":
         this.optionImage = "assets/images/type3.png";
-         break;
+        break;
 
     }
     this.isMenuLook();
@@ -57,13 +74,9 @@ export class NarbarComponent implements OnInit {
       "d-flex": false
     }
   }
-  onlogOut() {
-    this.authservice.logOut();
-    this.flashmessage.show('You are logged out', { cssClass: 'alert-success', timeout: 2000 });
-    this.router.navigate(['/login']);
-    return false;
 
+  ngOnDestroy() {
+    this.authListenerSubs.unsubscribe();
   }
-  ngOnInit() { }
 
 }

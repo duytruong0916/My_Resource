@@ -4,13 +4,15 @@ import { FlashMessagesService } from "angular2-flash-messages";
 import { AuthService } from "../../Services/auth.service";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators, FormControlName} from "@angular/forms";
-import {User} from "../user";
+import {User} from "../user-model";
 @Component({
   selector: 'app-registersecondphase',
   templateUrl: './registersecondphase.component.html',
   styleUrls: ['./registersecondphase.component.css']
 })
 export class RegistersecondphaseComponent implements OnInit {
+ isSuccessful:boolean;
+ isCreatedMessage:string;
  isEmailFilled: boolean;
  isPasswordFilled:boolean;
  isPassword_confirmFilled:boolean;
@@ -99,16 +101,19 @@ export class RegistersecondphaseComponent implements OnInit {
         'gender':this.form.value.gender,
         'password':this.form.value.password
             }
-      this.authService.user = user;
-      this.authService.AddUser(user).subscribe(data=>{
-        if(data.err){
+      this.authService.Register(user).subscribe(data=>{
+        if(data.success==false){
+          this.isSuccessful = data.success;
+          this.isCreatedMessage= data.msg;
           console.log(data.msg)
           return false;
         }
         else{
           console.log(data.msg)
-          console.log(this.authService.user)
-          this.router.navigate(["account"]);
+          this.isSuccessful = data.success;
+          this.isCreatedMessage= data.msg;
+          const userInfor ={email: user.email, password: user.password}
+          this.authService.Authenticate(userInfor);
           return true;
         }
       })

@@ -3,18 +3,14 @@ import { ValidateService } from "../../Services/validate.service";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { AuthService } from "../../Services/auth.service";
 import { Router } from "@angular/router";
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormControlName
-} from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 @Component({
   selector: "app-register",
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.css"]
 })
 export class RegisterComponent implements OnInit {
+  tokenTimer: any;
   isFirstnameFilled: boolean;
   isLastnameFilled: boolean;
   isEmailFilled: boolean;
@@ -23,11 +19,10 @@ export class RegisterComponent implements OnInit {
   isinvalidlogininfo = false;
   isMissingField;
   isInvalidEmail;
-
   usernameforfetch: String;
   ngOnInit() {
     this.form_1 = new FormGroup({
-      'email': new FormControl(null,{validators:[Validators.required, Validators.email]}),
+      'email': new FormControl(null, { validators: [Validators.required] }),
       'password': new FormControl(null, { validators: [Validators.required] })
     });
     this.form_2 = new FormGroup({
@@ -47,7 +42,7 @@ export class RegisterComponent implements OnInit {
     private flashmessage: FlashMessagesService,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
   onSubmitHandler() {
     this.isMissingField = false;
     this.isInvalidEmail = false;
@@ -79,33 +74,45 @@ export class RegisterComponent implements OnInit {
       return false;
     } else {
       this.authService.user = this.form_2.value;
-      this.authService.AddUser(this.authService.user).subscribe(response=>{
-
-      })
       this.router.navigate(["account"]);
       return true;
     }
   }
   onloginHandler() {
+    if(this.form_1.invalid)
+    {
+      this.flashmessage.show("MISSING FIELD",{ cssClass: 'alert-danger', timeout: 1000 } )
+      return;
+    }
     let user = {
       email: this.form_1.value.email,
       password: this.form_1.value.password
-    };
-    this.authService.authenticateUser(user).subscribe(data => {
+    }
+    this.authService.Authenticate(user).subscribe(data => {
       if (data.success) {
-        this.isinvalidlogininfo = false;
-        this.authService.storeUserData(data.token, data.user);
-        console.log("valid");
+        console.log(data.msg);
+        console.log(data);
+        const token = data.token;
+        const lastname = data.user.lastname;
+        if(token&&lastname)
+        {
+          this.authService.authStatusListener.next(true);
+          this.authService.authNamelistener.next(lastname);
+          this.authService.setLastname(lastname);
+          this.authService.setIsAuthenticated(true);
+        }
+        const expirationTime = data.expirationTime;
+        this.authService.setAuthTimer(expirationTime);
+        const NOW = new Date();
+        const expirationDate = new Date(NOW.getTime() + expirationTime * 1000);
+        this.authService.storeUserData(token, expirationDate, lastname);
+        this.router.navigate(['profile'])
       } else {
-        console.log("invalid");
-        this.isinvalidlogininfo = true;
-        this.flashmessage.show("Invalid email or password", {
-          cssClass: "alert-danger",
-          timeout: 2000
-        });
-        this.router.navigate(["register"]);
+        console.log(data.msg);
+        this.flashmessage.show(data.msg,{ cssClass: 'alert-danger', timeout: 1000 } )
       }
-    });
+    })
+
   }
   onchangehandler() {
     if (
@@ -130,10 +137,19 @@ export class RegisterComponent implements OnInit {
       this.isInvalidEmail = false;
     }
   }
+  /* For testing */
   fetchUser() {
-    console.log(this.usernameforfetch);
-    this.authService.getUser(this.usernameforfetch).subscribe(data => {
+    let user = {
+      email: 'nhatduy123@yahoo.com'
+    }
+    this.authService.getProfile(user).subscribe(data => {
       console.log(data);
     });
+  }
+  logOut() {
+    this.authService.logOut();
+    clearTimeout(this.tokenTimer);
+    this.router.navigate(['register']);
+
   }
 }

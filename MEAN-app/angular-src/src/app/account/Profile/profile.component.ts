@@ -8,19 +8,13 @@ import {FlashMessagesService} from 'angular2-flash-messages';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user:Object;
   constructor(private authservice: AuthService,
               private router: Router,
               private flashmessage: FlashMessagesService) { }
 
-  ngOnInit() {
-    this.authservice.getProfile().subscribe(profile=>{
-      this.user=profile.user;
-    },
-    err=>{
-      console.log(err);
-      return false;
-     });
+  ngOnInit(){
   }
-
+  onLogOut(){
+    this.authservice.logOut();
+  }
 }

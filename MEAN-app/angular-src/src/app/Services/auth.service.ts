@@ -1,55 +1,117 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import {User} from "../account/user";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from "../account/user-model";
+import { Subject } from 'rxjs';
+import { Router } from "@angular/router";
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  authtoken: string;
-  user:User;
-  constructor(private http: HttpClient) {
+  public isDone;
+  private tokenTimer;
+  private authtoken: string;
+  private isAuthenticated = false;
+  private lastname: string;
+  authStatusListener = new Subject<boolean>();
+  authNamelistener = new Subject<string>();
+  user: User;
+  constructor(private http: HttpClient,
+              private router: Router) { }
+
+  /* Get the user Information*/
+  getProfile(user) {
+    return this.http.post<any>('http://localhost:3000/api/user/profile', user)
   }
-  getUser(name): Observable<any[]>{
-    return this.http.get<any[]>(`http://localhost:3000/api/user/${name}`);
+  /* Create a new user */
+  Register(user): Observable<{ success: boolean, msg: string }> {
+    return this.http.post<{ success: boolean, msg: string }>('http://localhost:3000/api/user/register', user)
   }
-  AddUser(user): Observable<any>{
-      return this.http.post<any>('http://localhost:3000/api/user/register', user, {headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })})
+  Login():Observable<{ success: boolean, msg: string }>{
+    return this.http.get<{ success: boolean, msg: string }>('http://localhost:3000/api/user/login')
   }
-  authenticateUser(userinfo): Observable<{success: boolean, token: string, user: Object, msg: string}>{
-    return this.http.post<{success: boolean, token: string, user: Object, msg: string}>('http://localhost:3000/api/user/authenticate', userinfo, {headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })})
+  /* Authenticate the user-Login */
+  Authenticate(userinfo): Observable<{user: any, success: boolean, token: string, msg: string, expirationTime: number }>{
+    const Url ='http://localhost:3000/api/user/authenticate';
+    return this.http.post<{user: any, success: boolean, token: string, msg: string, expirationTime: number }>(Url, userinfo);
   }
-  getProfile(){
-    this.loadToken();
-    return this.http.get<any>('http://localhost:3000/api/user/profile', {headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `${this.authtoken}`
-    })})
-  }
-  storeUserData(token, user){
-    localStorage.setItem('id_token', token);
-    localStorage.setItem('user', JSON.stringify(user));
-    this.authtoken = token;
-    this.user = user;
-  }
-  loadToken(){
-    const token = localStorage.getItem('id_token');
-    this.authtoken = token;
-  }
-  logOut()
-  {
+  logOut() {
     this.authtoken = null;
     this.user = null;
-    localStorage.clear();
+    this.authStatusListener.next(false);
+    this.authNamelistener.next(null);
+    clearTimeout(this.tokenTimer);
+    this.clearUserData()
+    window.location.reload();
   }
- isLoggedIn(){
-   if(this.authtoken == null)
-      return false
-    else
-    return true;
- }
+  getToken() {
+    return this.authtoken;
+  }
+  setIsAuthenticated(params){
+    this.isAuthenticated = params;
+  }
+  setLastname(params){
+    this.lastname = params;
+  }
+  getIsAuthenticated() {
+    return this.isAuthenticated;
+  }
+  getAuthStatusListener() {
+    return this.authStatusListener.asObservable();
+  }
+  getUserlastname() {
+    if (!this.lastname) {
+      return 'Unknown'
+    }
+    return this.lastname;
+  }
+  getAuthNameListener(){
+    return this.authNamelistener.asObservable();
+  }
+  storeUserData(token: string, expirationTime: Date, lastname: string) {
+    localStorage.setItem('id_token', token);
+    localStorage.setItem('lastname', lastname);
+    localStorage.setItem('expiration', expirationTime.toISOString());
+    this.authtoken = token;
+  }
+  clearUserData() {
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('expiration');
+    localStorage.removeItem('lastname');
+  }
+  autoAuthUser() {
+    const authInfo = this.getAuthData();
+    if (!authInfo) {
+      return;
+    }
+    const now = new Date();
+    const expiredIn = authInfo.expirationDate.getTime() - now.getTime();
+    console.log(expiredIn)
+    if (expiredIn > 0) {
+      this.lastname = authInfo.lastname;
+      this.authtoken = authInfo.token;
+      this.setAuthTimer(expiredIn / 1000);
+      this.authStatusListener.next(true);
+      this.authNamelistener.next(this.lastname);
+      this.isAuthenticated = true;
+    }
+  }
+  setAuthTimer(duration: number) {
+    this.tokenTimer = setTimeout(() => {
+      this.logOut();
+    }, duration * 1000)
+  }
+  getAuthData() {
+    const lastname = localStorage.getItem('lastname');
+    const token = localStorage.getItem('id_token');
+    const expirationDate = localStorage.getItem('expiration');
+    if (!token || !expirationDate || !lastname) {
+      return;
+    }
+    return {
+      lastname: lastname,
+      token: token,
+      expirationDate: new Date(expirationDate)
+    };
+  }
 }
