@@ -7,11 +7,7 @@ const userSchema = new Schema({
     lastname: {type: String, require: true},
     firstname: {type: String, require: true},
     password: {type:String, require:true},
-    birthday: {type:String},
-    address: {type:String},
     email: {type:String, require:true, unique:true},
-    phone: {type:String},
-    orders: {type:Array}
 });
 userSchema.plugin(validators);
 const User = module.exports = mongoose.model('User', userSchema);

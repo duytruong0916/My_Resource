@@ -9,24 +9,34 @@ import { MyOwnCustomMaterialModule } from './shareModules.mudule';
 import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import {PostService } from './posts/post.service'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { HeaderInterceptor } from './auth/auth-intercept';
+import { AuthService } from './auth/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
+     HeaderComponent,
     PostCreateComponent,
-    HeaderComponent,
     PostListComponent,
+    SignInComponent,
+    SignUpComponent,
+    PagenotfoundComponent,
   ],
   imports: [
     HttpClientModule,
     MyOwnCustomMaterialModule,
     ReactiveFormsModule,
+    FlashMessagesModule.forRoot(),
     FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [PostService],
+  providers: [PostService,AuthService,{provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,14 @@
-<mat-toolbar class= "bg-dark">
-  <span class ="mr-auto text-white">My Application</span>
-  <span class="mr-5 text-white" [routerLink]="['/create-post']" routerLinkActive="router-link-active" >CREATE</span>
-  <span class="mr-5 text-white" [routerLink]="['/view-post']" routerLinkActive="router-link-active" >VIEW</span>
-
+<mat-toolbar class= "bg-white border">
+  <span class="option d-none d-md-block" [routerLink]="['/create-post']" routerLinkActive="my-activelink" >CREATE</span>
+  <span class="option d-none d-md-block" [routerLink]="['/view-post']" routerLinkActive="my-activelink" >VIEW</span>
+  <span class="option d-none d-md-block" *ngIf="!isLoggedIn" [routerLink]="['/sign-up']" routerLinkActive="my-activelink"  >REGISTER</span>
+  <span class="option d-none d-md-block" *ngIf="isLoggedIn" (click)="logOut()">LOG OUT</span>
+  <mat-menu #appMenu="matMenu">
+  <span  mat-menu-item [routerLink]="['/create-post']" routerLinkActive="my-activelink-1" >CREATE</span>
+  <span  mat-menu-item [routerLink]="['/view-post']" routerLinkActive="my-activelink-1" >VIEW</span>
+  <span  mat-menu-item *ngIf="!isLoggedIn" [routerLink]="['/sign-up']" routerLinkActive="my-activelink-1"  >REGISTER</span>
+  <span  mat-menu-item *ngIf="isLoggedIn" (click)="logOut()">LOG OUT</span>
+</mat-menu>
+  <span [matMenuTriggerFor]="appMenu" class="d-md-none d-block float-left"><i class="material-icons">reorder </i></span>
+  <span class="ml-auto" *ngIf="isLoggedIn"><span class="small">Hello </span><span class="font-weight-bold">{{user_lastname}} !</span></span>
 </mat-toolbar>
