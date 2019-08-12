@@ -4,7 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router';
 import {User} from '../auth/user.model';
-import {environment} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 const Backend_URL = environment.apiURL + '/user';
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,7 @@ export class AuthService {
     return this.http.post<{user: any, success: boolean, token: string, msg: string, expirationTime: number }>(Backend_URL+'/authenticate', userinfo);
   }
   logOut() {
+    this.isAuthenticated = false;
     this.authtoken = null;
     this.user = null;
     this.userid=null;
@@ -35,7 +36,8 @@ export class AuthService {
     this.authNamelistener.next(null);
     clearTimeout(this.tokenTimer);
     this.clearUserData()
-    window.location.reload();
+    this.router.navigate(['/sign-in'])
+
   }
   setUserId(id:string){
     this.userid = id;
@@ -87,7 +89,7 @@ export class AuthService {
     }
     const now = new Date();
     const expiredIn = authInfo.expirationDate.getTime() - now.getTime();
-    console.log(expiredIn)
+    //console.log(expiredIn)
     if (expiredIn > 0) {
       this.lastname = authInfo.lastname;
       this.authtoken = authInfo.token;

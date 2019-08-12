@@ -4,7 +4,7 @@ import { Post } from './post.model'
 import { Subject } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router';
-import {environment} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 const Backend_URL = environment.apiURL+ '/post';
 @Injectable({
   providedIn: 'root'

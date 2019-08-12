@@ -34,8 +34,8 @@ export class SignInComponent implements OnInit {
     }
     this.authservice.Authenticate(user).subscribe(data => {
       if (data.success) {
-        console.log(data.msg);
-        console.log(data);
+       // console.log(data.msg);
+       // console.log(data);
         const token = data.token;
         const lastname = data.user.lastname;
         const userid =data.user.userid
@@ -59,7 +59,7 @@ export class SignInComponent implements OnInit {
            this.isInvalid = false;
            clearTimeout(myVar);
           }, 1500);
-        console.log(data.msg);
+       // console.log(data.msg);
       }
     })
 

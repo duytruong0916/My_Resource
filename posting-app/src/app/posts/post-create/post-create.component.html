@@ -9,9 +9,9 @@
     <input type=file #file (change)="onImageHandler($event)">
     <div class="img-review mt-2 mt-md-4">
       <img [src]="imagePreview" [alt]="form.value.title"
-        *ngIf="imagePreview!==''&&imagePreview&&form.get('image').valid">
+        *ngIf="imagePreview!==''&&imagePreview">
     </div>
-    <mat-error *ngIf="form.get('image').invalid&&imagePreview">Invalid Image</mat-error>
+    <mat-error *ngIf="form.get('image').invalid&&form.get('image').touched||imagePreview==''">Invalid Image</mat-error>
     <mat-form-field>
       <textarea matInput rows="6" formControlName="content" placeholder="CONTENT:"></textarea>
       <mat-error *ngIf="form.get('content').invalid">Enter content</mat-error>
