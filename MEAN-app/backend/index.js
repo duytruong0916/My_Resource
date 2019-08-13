@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();                           //set up express app
-const config = require('./config/database.js.js');
+const config = require('./config/database.js');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');            //connect to database
-const morgan = require('morgan');
+const morgan = require('morgan');                //for displaying the request
 const passport = require('passport');            //for user anthentication
 var cors = require('cors')                       //for the front-end to connect to the server
 
@@ -31,5 +31,6 @@ app.use('/api', require('./routes/product-api'));     //Initialize routes
 app.use('/uploads',express.static('uploads'));
 
 //listening for requests
-const PORT = process.env.PORT || 3000 ;
-app.listen(process.env.PORT ||3000, () => console.log(`Server started on PORT ${PORT}`));
+//const PORT = process.env.PORT || 3000 ;
+//app.listen(process.env.PORT ||3000, () => console.log(`Server started on PORT ${PORT}`));
+module.exports = app;

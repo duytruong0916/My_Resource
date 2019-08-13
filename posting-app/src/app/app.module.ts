@@ -17,6 +17,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HeaderInterceptor } from './auth/auth-intercept';
 import { AuthService } from './auth/auth.service';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { ImageService } from './posts/image.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,7 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
     BrowserAnimationsModule,
     Ng2ImgMaxModule
   ],
-  providers: [PostService,AuthService,{provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor,multi:true}],
+  providers: [PostService,ImageService ,AuthService,{provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

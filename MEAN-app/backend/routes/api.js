@@ -8,11 +8,9 @@ Router.get('/car', (req, res,next)=>{
         else res.send(car);
     })
 });
-    
- 
 
 Router.post('/car', (req, res, next)=>{
-    var newcar = new Car({  
+    var newcar = new Car({
         password: req.body.password,
         title: req.body.title,
         model: req.body.model,

@@ -3,9 +3,9 @@ const bcrypt = require('bcryptjs');
 const express = require('express');
 const router = express.Router()
 const passport = require('passport');
-const config = require('../config/database.js.js');
+const config = require('../config/database.js');
 const jwt = require('jsonwebtoken');
-const checkAuth = require('../middlewares/check_auth.js.js')
+const checkAuth = require('../middlewares/check_auth.js')
 
 router.get("/user/login", checkAuth, (req,res)=>{
     res.json({success: true, msg: "Successfully logged in!"})
