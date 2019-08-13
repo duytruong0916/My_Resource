@@ -1,0 +1,47 @@
+@media screen and (max-width: 768px) {
+  mat-expansion-panel{
+    width: 100%;
+  }
+}
+  @media screen and (min-width: 768px) {
+    mat-expansion-panel{
+      width: 40%;
+    }
+  }
+mat-toolbar{
+  font-family: 'Montserrat', sans-serif;
+}
+span:hover{
+    cursor: pointer;
+  }
+.material-icons{
+  color: black;
+  font-size: 30px;
+}
+.option{
+  color: rgb(173, 164, 164);
+  font-size: 15px;
+  margin: 10px 20px;
+  padding: 3px 15px;
+  outline: none;
+}
+.option:hover{
+  color: black;
+  border-bottom: solid black 2px;
+  font-weight: bolder;
+  font-size: 18px;
+  font-size:18px;
+}
+.my-activelink{
+  color: black;
+  border-bottom: solid black 2px;
+  font-weight: bolder;
+  font-size: 18px;
+  text-decoration: none;
+
+}
+.my-activelink-1{
+  color: black;
+  font-weight: bolder;
+}
+

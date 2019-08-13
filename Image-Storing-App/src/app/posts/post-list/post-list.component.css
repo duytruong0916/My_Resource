@@ -1,0 +1,42 @@
+@media screen and (max-width: 768px) {
+  mat-expansion-panel{
+    width: 100%;
+  }
+}
+  @media screen and (min-width: 768px) {
+    mat-expansion-panel{
+      width: 40%;
+    }
+  }
+
+.info-text{
+  text-align: center;
+}
+.container{
+  width: 50%;
+  margin: auto;
+}
+mat-spinner{
+  margin: auto;
+}
+.rotate90 {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+ }
+ .rotate180 {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+ }
+ .rotate270 {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
+ }

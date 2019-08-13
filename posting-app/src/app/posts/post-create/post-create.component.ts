@@ -45,58 +45,60 @@ export class PostCreateComponent implements OnInit {
   }
   onImageHandler(e) {
     const file = e.target.files[0];
-    if(!file){
+    if (!file) {
       return;
     }
-    const filename = file.name;
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload= (ev) => {
-      const img = new Image();
-      var base64 = (ev.target as any).result;
-      img.src = base64;
-      const orientation = this.imageservice.getOrientation(base64);
-      console.log(orientation)
-      this.imagePreview = (ev.target as any).result;
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext("2d");
-        const width = 500;
-        const scaleFactor = width / img.width;
-        const height = img.height * scaleFactor;
-        // set proper canvas dimensions before transform & export
-        if (4 < orientation && orientation < 9) {
-          canvas.width = height;
-          canvas.height = width;
-        } else {
-          canvas.width = width;
-          canvas.height = height;
+    this.imageservice.getOrientation(file ,(orientation)=>{
+      this.orientation = orientation;
+      const filename = file.name;
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (ev) => {
+        const img = new Image();
+        var base64 = (ev.target as any).result;
+        img.src = base64;
+        this.imagePreview =(ev.target as any).result;
+        console.log(this.orientation)
+        this.imagePreview = (ev.target as any).result;
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext("2d");
+          const width = 500;
+          const scaleFactor = width / img.width;
+          const height = img.height * scaleFactor;
+          // set proper canvas dimensions before transform & export
+          if (4 < this.orientation && this.orientation < 9) {
+            canvas.width = height;
+            canvas.height = width;
+          } else {
+            canvas.width = width;
+            canvas.height = height;
+          }
+          // transform context before drawing image
+          switch (this.orientation) {
+            case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
+            case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
+            case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
+            case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
+            case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
+            case 7: ctx.transform(0, -1, -1, 0, height, width); break;
+            case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
+            default: break;
+          }
+          ctx.drawImage(img, 0, 0, width, img.height * scaleFactor)
+          ctx.canvas.toBlob((blob) => {
+            const file = new File([blob], filename, {
+              type: 'image/jpeg',
+              lastModified: Date.now()
+            });
+            this.form.patchValue({ image: file });
+            this.form.get('image').updateValueAndValidity();
+            // this.file = file
+          }, 'image/jpeg', 1);
         }
-        // transform context before drawing image
-        switch (orientation) {
-          case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
-          case 3: ctx.transform(-1, 0, 0, -1, width, height); break;
-          case 4: ctx.transform(1, 0, 0, -1, 0, height); break;
-          case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
-          case 6: ctx.transform(0, 1, -1, 0, height, 0); break;
-          case 7: ctx.transform(0, -1, -1, 0, height, width); break;
-          case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
-          default: break;
-        }
-        ctx.drawImage(img, 0, 0, width, img.height * scaleFactor)
-        ctx.canvas.toBlob((blob) => {
-          const file = new File([blob], filename, {
-            type: 'image/jpeg',
-            lastModified: Date.now()
-          });
-          this.form.patchValue({image:file});
-           this.form.get('image').updateValueAndValidity();
-          console.log(this.form.get('image').value)
-
-         // this.file = file
-        }, 'image/jpeg', 1);
       }
-    }
+    });
+
   }
 
   ngOnInit() {
