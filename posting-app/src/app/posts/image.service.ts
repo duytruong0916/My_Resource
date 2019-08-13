@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class ImageService {;
+export class ImageService {
   constructor() { };
   getOrientation(file, callback) {
     const reader = new FileReader();
