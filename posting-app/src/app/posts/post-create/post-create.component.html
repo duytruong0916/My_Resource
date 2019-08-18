@@ -1,22 +1,26 @@
-<mat-card>
+<div class= "form-card mx-auto">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form [formGroup]="form" *ngIf="!isLoading">
+  <form [formGroup]="form" *ngIf="!isLoading" class="mx-auto">
     <mat-form-field>
       <textarea matInput rows="2" formControlName="title" placeholder="TITLE:"></textarea>
       <mat-error *ngIf="form.get('title').invalid">Enter a title</mat-error>
     </mat-form-field>
-    <button type="button" mat-raised-button class="bg-dark text-white mt-2 " (click)="file.click()">PICK IMAGE</button>
-    <input type=file #file (change)="onImageHandler($event)">
-    <div class="img-review mt-2 mt-md-4">
-      <img [src]="imagePreview" [alt]="form.value.title"
-        *ngIf="imagePreview!==''&&imagePreview">
+    <button type="button" class="button-image bg-dark text-white mt-2 " (click)="file_.click()">Add Image</button>
+    <input type='file' #file_ (change)="onImageHandler($event)" accept="image/*" multiple>
+    <div class="row no-gutters">
+    <div class="col col-md-4 col-6 mt-2 mt-md-2 text-center" *ngFor="let image of imagePreview; let i = index">
+      <img [src]="image" [alt]="form.value.title" class="mw-100" width="400" height= "200"
+        *ngIf="imagePreview.length!==0&&imagePreview">
+      <i class="material-icons float-right" (click)="onRemove(i)">clear</i>
     </div>
-    <mat-error *ngIf="form.get('image').invalid&&form.get('image').touched||imagePreview==''">Invalid Image</mat-error>
+    </div>
+    <mat-error *ngIf= "!isSelected">Image Missing</mat-error>
     <mat-form-field>
-      <textarea matInput rows="6" formControlName="content" placeholder="CONTENT:"></textarea>
+      <textarea matInput rows="4" formControlName="content" placeholder="CONTENT:"></textarea>
       <mat-error *ngIf="form.get('content').invalid">Enter content</mat-error>
     </mat-form-field>
-    <button (click)="onAddPost()" mat-raised-button class="bg-dark text-white">ADD POST
+    <button (click)="onAddPost()"  class="submit-button bg-dark text-white">ADD POST
     </button>
   </form>
-</mat-card>
+</div>
+

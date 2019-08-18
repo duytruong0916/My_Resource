@@ -3,12 +3,17 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ImageService {
+  public orientation;
   constructor() { };
+
+
   getOrientation(file, callback) {
     const reader = new FileReader();
+    reader.readAsArrayBuffer(file.slice(0, 64 * 1024));
     reader.onload = (event) => {
       var view = new DataView((event.target as any).result);
-      if (view.getUint16(0, false) != 0xFFD8) return callback(-2);
+      if (view.getUint16(0, false) != 0xFFD8)
+        return callback(-2,file);
       var length = view.byteLength,
         offset = 2;
       while (offset < length) {
@@ -16,7 +21,7 @@ export class ImageService {
         offset += 2;
         if (marker == 0xFFE1) {
           if (view.getUint32(offset += 2, false) != 0x45786966) {
-            return callback(-1);
+           callback(-1,file);
           }
           var little = view.getUint16(offset += 6, false) == 0x4949;
           offset += view.getUint32(offset + 4, little);
@@ -24,15 +29,13 @@ export class ImageService {
           offset += 2;
           for (var i = 0; i < tags; i++)
             if (view.getUint16(offset + (i * 12), little) == 0x0112)
-              return callback(view.getUint16(offset + (i * 12) + 8, little));
+              return callback(view.getUint16(offset + (i * 12) + 8, little),file)
         }
         else if ((marker & 0xFF00) != 0xFF00) break;
         else offset += view.getUint16(offset, false);
       }
-      return callback(-1);
+      return callback(-1,file);
     };
-
-    reader.readAsArrayBuffer(file.slice(0, 64 * 1024));
   };
   /*convert base64 to arraybuffer*/
   str2ab(str) {

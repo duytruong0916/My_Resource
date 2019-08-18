@@ -4,7 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router';
 import {User} from '../auth/user.model';
-import {environment} from "../../environments/environment.prod";
+import {environment} from "../../environments/environment";
 const Backend_URL = environment.apiURL + '/user';
 @Injectable({
   providedIn: 'root'

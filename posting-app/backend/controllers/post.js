@@ -13,12 +13,18 @@ exports.GetPostWithID = (req,res)=>{
   })
 }
 
-exports.AddPost = (req,res)=>{
+exports.AddPost = (req,res)=>{0
+  const files = req.files;
   const url = req.protocol + '://' + req.get('host');
+  const arr = new Array();
+  for(var i=0; i<files.length; i++)
+  {
+    arr.push(url + '/uploads/' + req.files[i].filename)
+  }
   const post = new Post({
     title: req.body.title,
     content: req.body.content,
-    imagePath: url + '/uploads/' + req.file.filename,
+    imagePaths: arr,
     creator: req.userData.userid
   })
   post.save().then(result => {
@@ -29,7 +35,7 @@ exports.AddPost = (req,res)=>{
           title: result.title,
           content: result.content,
           id: result._id,
-          imagePath: result.imagePath
+          imagePaths: result.imagePaths
         }
     });
 })
@@ -43,16 +49,32 @@ exports.DeletePost =  (req,res)=>{
 })
 }
 exports.UpdatePost = (req,res)=>{
-  let imagePath =  req.body.image;
-  if(req.file){
-     const url = req.protocol + '://' + req.get('host');
-     imagePath= url + '/uploads/' + req.file.filename
+  const url = req.protocol + '://' + req.get('host');
+  const files = req.files;
+  const arr = new Array();
+  const imagePaths = req.body.imgsrc;
+  if(imagePaths)
+  {
+    if(typeof imagePaths ==='string')
+    arr.push(imagePaths)
+    else{
+      for(var i=0; i<imagePaths.length; i++)
+      {
+        arr.push(imagePaths[i])
+      }
+    }
+  }
+  if(req.files){
+    for(var i=0; i<files.length; i++)
+    {
+      arr.push(url + '/uploads/' + req.files[i].filename)
+    }
   }
   const post = new Post({
     _id: req.body.id,
     title: req.body.title,
     content: req.body.content,
-    imagePath: imagePath,
+    imagePaths: arr,
     creator: req.userData.userid
   })
   Post.updateOne({_id: req.params.id, creator: req.userData.userid}, post).then(result=>{

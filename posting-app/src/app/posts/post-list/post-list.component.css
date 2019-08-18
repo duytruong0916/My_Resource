@@ -1,42 +1,61 @@
 @media screen and (max-width: 768px) {
-  mat-expansion-panel{
-    width: 100%;
+  .post{
+    width:100%;
   }
-}
-  @media screen and (min-width: 768px) {
-    mat-expansion-panel{
-      width: 40%;
-    }
+  img {
+    width: 100%;
+    height: 200px;
   }
 
-.info-text{
-  text-align: center;
 }
-.container{
-  width: 50%;
-  margin: auto;
+  @media screen and (min-width: 768px) {
+    .post{
+      width:60%;
+    }
+    img {
+      width: 100%;
+      height: 300px;
+    }
+
+  }
+.post{
+  background-color: white;
+  padding: 40px;
+  font-family: 'Montserrat', sans-serif;
+  border: rgba(0, 0, 0, 0.336) 0.5px outset;
 }
-mat-spinner{
-  margin: auto;
+.title{
+  font-size: 20px;
+  font-weight: bolder;
+  color:black;
 }
-.rotate90 {
-  -webkit-transform: rotate(90deg);
-  -moz-transform: rotate(90deg);
-  -o-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
- }
- .rotate180 {
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
- }
- .rotate270 {
-  -webkit-transform: rotate(270deg);
-  -moz-transform: rotate(270deg);
-  -o-transform: rotate(270deg);
-  -ms-transform: rotate(270deg);
-  transform: rotate(270deg);
- }
+.content-text{
+  word-wrap: break-word;
+  text-justify: auto;
+  text-indent: 30px;
+}
+button{
+  float:right;
+}
+.delete-bt{
+  background-color: white;
+  color:red;
+  font-size: 12px;
+  border: none;
+  font-weight: bolder;
+  padding: 10px;
+}
+.edit-bt{
+  background-color: white;
+  color:blue;
+  font-size: 12px;
+  border: none;
+  font-weight: bolder;
+  padding: 10px;
+}
+.edit-bt:hover, .delete-bt:hover{
+  background-color: rgb(196, 212, 226);
+}
+img{
+  object-fit: cover;
+}

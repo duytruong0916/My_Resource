@@ -10,12 +10,13 @@
   }
 mat-toolbar{
   font-family: 'Montserrat', sans-serif;
+  background-color: black;
 }
 span:hover{
     cursor: pointer;
   }
 .material-icons{
-  color: black;
+  color: white;
   font-size: 30px;
 }
 .option{
@@ -26,15 +27,15 @@ span:hover{
   outline: none;
 }
 .option:hover{
-  color: black;
-  border-bottom: solid black 2px;
+  color: white;
+  border-bottom: solid white 2px;
   font-weight: bolder;
   font-size: 18px;
   font-size:18px;
 }
 .my-activelink{
-  color: black;
-  border-bottom: solid black 2px;
+  color: white;
+  border-bottom: solid white 2px;
   font-weight: bolder;
   font-size: 18px;
   text-decoration: none;
@@ -44,4 +45,6 @@ span:hover{
   color: black;
   font-weight: bolder;
 }
-
+.user-name{
+  color:white;
+}
