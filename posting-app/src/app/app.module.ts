@@ -16,7 +16,6 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HeaderInterceptor } from './auth/auth-intercept';
 import { AuthService } from './auth/auth.service';
-import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { ImageService } from './posts/image.service';
 @NgModule({
   declarations: [
@@ -37,7 +36,6 @@ import { ImageService } from './posts/image.service';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    Ng2ImgMaxModule
   ],
   providers: [PostService,ImageService ,AuthService,{provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor,multi:true}],
   bootstrap: [AppComponent]

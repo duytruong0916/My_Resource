@@ -7,7 +7,7 @@
     </mat-form-field>
     <button type="button" class="button-image bg-dark text-white mt-2 " (click)="file_.click()">Add Image</button>
     <input type='file' #file_ (change)="onImageHandler($event)" accept="image/*" multiple>
-    <div class="row no-gutters">
+    <div class="row ">
     <div class="col col-md-4 col-6 mt-2 mt-md-2 text-center" *ngFor="let image of imagePreview; let i = index">
       <img [src]="image" [alt]="form.value.title" class="mw-100" width="400" height= "200"
         *ngIf="imagePreview.length!==0&&imagePreview">
@@ -15,6 +15,7 @@
     </div>
     </div>
     <mat-error *ngIf= "!isSelected">Image Missing</mat-error>
+    <mat-error *ngIf= "!isvalid">Ivalid File Input</mat-error>
     <mat-form-field>
       <textarea matInput rows="4" formControlName="content" placeholder="CONTENT:"></textarea>
       <mat-error *ngIf="form.get('content').invalid">Enter content</mat-error>

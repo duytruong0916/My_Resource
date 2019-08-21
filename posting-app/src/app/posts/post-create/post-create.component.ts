@@ -22,7 +22,7 @@ export class PostCreateComponent implements OnInit {
   public isLoading = false;
   public postid: string;
   public post: Post;
-  public enteredvalue;
+  public isvalid:boolean = true;
   constructor(private postservice: PostService,
     private activateroute: ActivatedRoute,
     private imageservice: ImageService,
@@ -61,11 +61,11 @@ export class PostCreateComponent implements OnInit {
     const files: File[] = e.target.files;
     /* Images review */
     for (var i = 0, len = files.length; i < len; i++) {
-      (<FormArray>this.form.get('images')).push(new FormControl(files[i], { validators: [Validators.required], asyncValidators:[mimeType]}));
+      (<FormArray>this.form.get('images')).push(new FormControl(files[i], { validators: [Validators.required], asyncValidators:[mimeType]}))
       const reader = new FileReader();
       reader.readAsDataURL(files[i]);
       reader.onload = (ev) => {
-        this.imagePreview.push((ev.target as any).result)
+      this.imagePreview.push((ev.target as any).result)
       }
       /* Transform the input files */
       this.imageservice.getOrientation(files[i], (orientation, file) => {
@@ -112,6 +112,8 @@ export class PostCreateComponent implements OnInit {
     }
   }
   onAddPost() {
+    console.log(this.form)
+    console.log(this.form.valid)
     if (this.form.valid) {
       if (!(<FormArray>this.form.get('images')).at(0) &&this.imagePreview.length<=0) {
         this.isSelected = false;
