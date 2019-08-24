@@ -57,5 +57,5 @@ button{
   background-color: rgb(196, 212, 226);
 }
 img{
-  object-fit: cover;
+  object-fit: contain;
 }

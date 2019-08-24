@@ -1,27 +1,26 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <div class="post mx-auto" *ngFor="let post of posts.reverse()">
-    <div class="header">
-      <div class="title">
-        {{post.title}}
-      </div>
+<div class="post mx-auto mt-2" *ngFor="let post of posts">
+  <div class="header">
+    <div class="title">
+      {{post.title}}
     </div>
-    <hr>
-    <div class="row no-gutters ">
-    <div class="col col-md-6 col-12 mt-3 text-center " *ngFor= "let imagepath of post.imagePaths; let i = index">
+  </div>
+  <hr>
+  <div class="row no-gutters ">
+    <div class="col col-md-6 col-12 mt-3 text-center " *ngFor="let imagepath of post.imagePaths; let i = index">
       <img [src]='imagepath' class=" mw-100" [id]='i'>
     </div>
-   </div>
-   <hr>
-    <div class="content-text w-100 mt-3">
-      {{post.content}}
-    </div>
-    <div *ngIf="userid===post.creator">
-      <button class="delete-bt ml-1" (click)="onDelete(post.id)">DELETE</button>
-      <button  class="edit-bt"[routerLink]="['/edit-post', post.id]"
-        routerLinkActive="router-link-active">EDIT</button>
-    </div>
   </div>
-  <div class="text-center">
-    <h5 class="mx-auto" *ngIf="posts.length <=0 && !isLoading">No Post Added Yet</h5>
+  <hr>
+  <div class="content-text w-100 mt-3">
+    {{post.content}}
   </div>
+  <div *ngIf="userid===post.creator">
+    <button class="delete-bt ml-1" (click)="onDelete(post.id)">DELETE</button>
+    <button class="edit-bt" (click) ="onClick(post.id)" routerLinkActive="router-link-active">EDIT</button>
+  </div>
+</div>
+<div class="text-center">
+  <h5 class="mx-auto" *ngIf="posts.length <=0 && !isLoading">No Post Added Yet</h5>
+</div>
 

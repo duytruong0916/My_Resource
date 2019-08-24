@@ -52,7 +52,7 @@ export class SignInComponent implements OnInit {
         const NOW = new Date();
         const expirationDate = new Date(NOW.getTime() + expirationTime * 1000);
         this.authservice.storeUserData(token, expirationDate, lastname, userid);
-        this.router.navigate(['create-post'])
+        this.router.navigate(['posts/create-post'])
       } else {
         this.isInvalid = true;
         let myVar = setTimeout(()=>{

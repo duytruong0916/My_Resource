@@ -11,6 +11,7 @@
 mat-toolbar{
   font-family: 'Montserrat', sans-serif;
   background-color: black;
+  position: sticky;
 }
 span:hover{
     cursor: pointer;
@@ -22,7 +23,7 @@ span:hover{
 .option{
   color: rgb(173, 164, 164);
   font-size: 15px;
-  margin: 10px 20px;
+  margin: 5px 20px;
   padding: 3px 15px;
   outline: none;
 }
@@ -39,12 +40,25 @@ span:hover{
   font-weight: bolder;
   font-size: 18px;
   text-decoration: none;
+  outline: none;
 
 }
 .my-activelink-1{
-  color: black;
+  color: white;
   font-weight: bolder;
+  outline: none;
 }
 .user-name{
   color:white;
+}
+.Menu{
+  margin-top: -10px;
+  padding: 0;
+  text-align: center;
+  color:rgba(255, 255, 255, 0.568);
+  background-color: black !important;
+}
+.item{
+  background-color: black;
+  padding: 10px;
 }

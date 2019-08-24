@@ -15,7 +15,7 @@ export class AuthGaurd implements CanActivate{
      const isAuth = this.authservice.getIsAuthenticated();
      if(!isAuth)
      {
-        this.router.navigate(['sign-in']);
+        this.router.navigate(['auth/sign-in']);
      }
     return isAuth;
 

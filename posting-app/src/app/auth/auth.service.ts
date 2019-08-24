@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators'
 import { Router } from '@angular/router';
 import {User} from '../auth/user.model';
-import {environment} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 const Backend_URL = environment.apiURL + '/user';
 @Injectable({
   providedIn: 'root'

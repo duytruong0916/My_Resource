@@ -8,8 +8,8 @@ exports.GetPost  = (req,res)=>{
 }
 exports.GetPostWithID = (req,res)=>{
   Post.findById(req.params.id, (err, documents)=>{
-    if(err) res.json({msg: "Failed to fetch post"})
-    res.json({msg: "Successfully fetched", post: documents})
+    if(err) res.json({success:false, message: "Failed to fetch post"})
+    res.json({success: true, message: "Successfully fetched", post: documents})
   })
 }
 

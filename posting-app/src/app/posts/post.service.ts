@@ -4,7 +4,7 @@ import { Post } from './post.model'
 import { Subject } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Router } from '@angular/router';
-import { environment } from "../../environments/environment";
+import { environment } from "../../environments/environment.prod";
 const Backend_URL = environment.apiURL + '/post';
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,6 @@ export class PostService {
         })
       }))
       .subscribe(posts => {
-        console.log(posts);
         this.posts = posts;
         this.updatedPosts.next([...this.posts]);
       })
@@ -36,7 +35,7 @@ export class PostService {
   getPostID(postid: string) {
     const params = new HttpParams();
     params.append('id', postid);
-    return this.http.get<{ message: string, post: any }>(Backend_URL + `${postid}`, { params: params })
+    return this.http.get<{ message: string, post: any, success:boolean }>(Backend_URL + `${postid}`, { params: params })
   }
   getupdatedPostListener() {
     return this.updatedPosts.asObservable();
@@ -59,7 +58,7 @@ export class PostService {
         }
         this.posts.push(post);
         this.updatedPosts.next([...this.posts]);
-        this.router.navigate(['/view-post'])
+        this.router.navigate(['posts/view-post'])
       })
   }
   deletePost(id: string) {
@@ -96,7 +95,7 @@ export class PostService {
         updatedPosts[oldPostIndex] = post;
         this.posts = updatedPosts;
         this.updatedPosts.next([...this.posts]);
-        this.router.navigate(['/view-post'])
+        this.router.navigate(['posts/view-post'])
       })
   }
 }

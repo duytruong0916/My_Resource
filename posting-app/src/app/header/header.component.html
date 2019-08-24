@@ -1,15 +1,15 @@
-<mat-toolbar>
-  <span class="option d-none d-md-block" [routerLink]="['/create-post']" routerLinkActive="my-activelink" >CREATE</span>
-  <span class="option d-none d-md-block" [routerLink]="['/view-post']" routerLinkActive="my-activelink" >VIEW</span>
-  <span class="option d-none d-md-block" *ngIf="!isLoggedIn" [routerLink]="['/sign-up']" routerLinkActive="my-activelink"  >REGISTER</span>
-  <span class="option d-none d-md-block" *ngIf="isLoggedIn" (click)="logOut()">LOG OUT</span>
-  <mat-menu #appMenu="matMenu">
-  <span  mat-menu-item [routerLink]="['/create-post']" routerLinkActive="my-activelink-1" >CREATE</span>
-  <span  mat-menu-item [routerLink]="['/view-post']" routerLinkActive="my-activelink-1" >VIEW</span>
-  <span  mat-menu-item *ngIf="!isLoggedIn" [routerLink]="['/sign-up']" routerLinkActive="my-activelink-1"  >REGISTER</span>
-  <span  mat-menu-item *ngIf="isLoggedIn" (click)="logOut()">LOG OUT</span>
-</mat-menu>
-  <span [matMenuTriggerFor]="appMenu" class="d-md-none d-block float-left"><i class="material-icons">reorder </i></span>
+<mat-toolbar >
+  <span class="option d-none d-md-block" [routerLink]="['posts/create-post']" routerLinkActive="my-activelink" >Create A Post</span>
+  <span class="option d-none d-md-block" [routerLink]="['posts/view-post']" routerLinkActive="my-activelink" >View Your Posts</span>
+  <span class="option d-none d-md-block" *ngIf="!isLoggedIn" [routerLink]="['/auth/sign-up']" routerLinkActive="my-activelink"  >Register</span>
+  <span class="option d-none d-md-block" *ngIf="isLoggedIn" (click)="logOut()">Log Out</span>
+  <span class="d-md-none d-block float-left" (click)="onToggle()"><i class="material-icons">reorder </i></span>
   <span class="user-name ml-auto" *ngIf="isLoggedIn"><span class="small">Hello </span><span class="font-weight-bold">{{user_lastname}} !</span></span>
   <span class="user-name ml-auto" *ngIf="!isLoggedIn"><span>Welcome Back !</span></span>
 </mat-toolbar>
+<div class = "Menu d-md-none d-block" *ngIf ="isToggled">
+  <div class="item mt-2" [routerLink]="['posts/create-post']" routerLinkActive="my-activelink-1" >Create A Post</div>
+  <div class="item mt-2" [routerLink]="['posts/view-post']" routerLinkActive="my-activelink-1" >View Your Posts</div>
+  <div class="item mt-2" *ngIf="!isLoggedIn" [routerLink]="['/auth/sign-up']" routerLinkActive="my-activelink-1"  >Register</div>
+  <div class="item mt-2" *ngIf="isLoggedIn" (click)="logOut()">Log Out</div>
+</div>

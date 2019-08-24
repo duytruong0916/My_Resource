@@ -31,7 +31,7 @@ export class PostCreateComponent implements OnInit {
     this.form = new FormGroup({
       title: new FormControl(null, { validators: [Validators.required] }),
       content: new FormControl(null, { validators: [Validators.required] }),
-      images: new FormArray([])
+      //images: new FormArray([])
     })
     this.isLoading = true;
     this.activateroute.paramMap.subscribe((paramap) => {
@@ -39,17 +39,25 @@ export class PostCreateComponent implements OnInit {
       if (paramap.has('postid')) {
         this.mode = "edit";
         this.postid = paramap.get('postid');
+        console.log(paramap.get('postid'))
         this.postservice.getPostID(this.postid).subscribe(response => {
-          this.post = {
-            id: response.post._id,
-            title: response.post.title,
-            content: response.post.content,
-            imagePaths: response.post.imagePaths,
-            creator: response.post.creator
-          };
-          this.form.patchValue({ title: this.post.title, content: this.post.content })
-          this.imageSrc.push(...this.post.imagePaths);
-          this.imagePreview.push(...this.post.imagePaths);
+          if(response.success){
+            console.log(response.post._id)
+            this.post = {
+              id: response.post._id,
+              title: response.post.title,
+              content: response.post.content,
+              imagePaths: response.post.imagePaths,
+              creator: response.post.creator
+            };
+            this.form.patchValue({ title: this.post.title, content: this.post.content })
+            this.imageSrc.push(...this.post.imagePaths);
+            this.imagePreview.push(...this.post.imagePaths);
+          }
+          else {
+            console.log(response.message)
+            return;
+          }
         })
       } else {
         this.mode = "create";
@@ -61,7 +69,7 @@ export class PostCreateComponent implements OnInit {
     const files: File[] = e.target.files;
     /* Images review */
     for (var i = 0, len = files.length; i < len; i++) {
-      (<FormArray>this.form.get('images')).push(new FormControl(files[i], { validators: [Validators.required], asyncValidators:[mimeType]}))
+      //(<FormArray>this.form.get('images')).push(new FormControl(files[i], { validators: [Validators.required], asyncValidators:[mimeType]}))
       const reader = new FileReader();
       reader.readAsDataURL(files[i]);
       reader.onload = (ev) => {
@@ -115,7 +123,7 @@ export class PostCreateComponent implements OnInit {
     console.log(this.form)
     console.log(this.form.valid)
     if (this.form.valid) {
-      if (!(<FormArray>this.form.get('images')).at(0) &&this.imagePreview.length<=0) {
+      if (this.imagePreview.length<=0) {
         this.isSelected = false;
         let myVar = setTimeout(() => {
           this.isSelected = true;
@@ -139,7 +147,6 @@ export class PostCreateComponent implements OnInit {
     const filtered_file = this.files.slice(0, index).concat(this.files.slice(index + 1, this.files.length));
     const filtered_image = this.imagePreview.slice(0, index).concat(this.imagePreview.slice(index + 1, this.imagePreview.length));
     const filtered_imagesrc = this.imageSrc.slice(0, index).concat(this.imageSrc.slice(index + 1, this.imageSrc.length));
-    (<FormArray>this.form.get('images')).removeAt(index);
     this.files = [...filtered_file];
     this.imagePreview = [...filtered_image];
     this.imageSrc = [...filtered_imagesrc];

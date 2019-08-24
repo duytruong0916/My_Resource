@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  public isToggled = false;
   isLoggedIn:boolean = false;
   public user_lastname:string;
   public authListenerSubs: Subscription;
@@ -25,7 +26,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.user_lastname = lastname.toUpperCase();
     })
   }
-
+  onToggle(){
+    this.isToggled =!this.isToggled;
+  }
   ngOnDestroy() {
     this.authListenerSubs.unsubscribe();
   }
