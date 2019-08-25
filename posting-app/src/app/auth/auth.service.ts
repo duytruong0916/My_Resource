@@ -35,7 +35,7 @@ export class AuthService {
     this.authNamelistener.next(null);
     clearTimeout(this.tokenTimer);
     this.clearUserData()
-    this.router.navigate(['/sign-in'])
+    this.router.navigate(['/auth/sign-in'])
 
   }
   setUserId(id:string){

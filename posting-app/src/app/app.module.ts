@@ -1,8 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { PostsModule } from './posts/posts.module';
-//import { AuthModule } from './auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {PostService } from './posts/post.service'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -21,11 +19,9 @@ import { HeaderComponent } from './header/header.component';
     PagenotfoundComponent,
   ],
   imports: [
-    //AuthModule,
-    PostsModule,
     HttpClientModule,
     FlashMessagesModule.forRoot(),
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule
