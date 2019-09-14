@@ -28,6 +28,7 @@
   }
   mat-card{
     font-family: 'Montserrat', sans-serif;
+    height:100vh;
   }
   mat-form-field {
     position: relative;
