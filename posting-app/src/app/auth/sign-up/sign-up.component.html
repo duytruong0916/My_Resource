@@ -1,5 +1,6 @@
+<div class="container-fluid">
 <mat-card>
-  <h3>REGISTER</h3>
+  <h3 class="mt-4">Register</h3>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form [formGroup]="form" *ngIf="!isLoading">
     <mat-form-field class="name">
@@ -24,7 +25,14 @@
     </mat-form-field>
     <mat-error class= "mt-2" *ngIf="NotMatched">Passwords do not match</mat-error>
     <mat-error class= "mt-2" *ngIf="!isCreated&&!NotMatched&&form.valid">{{message}}</mat-error>
+    <div>
     <button (click)="onSignUp()" class="button-submit mt-3 bg-dark text-white" [disabled]="form.invalid">CREATE AN ACCOUNT
     </button>
+   </div>
+   <div>
+    <button class="button-submit last bg-dark text-white mt-2" [routerLink]="['/auth/sign-in']" routerLinkActive="router-link-active" >LOG IN
+    </button>
+    </div>
   </form>
 </mat-card>
+</div>

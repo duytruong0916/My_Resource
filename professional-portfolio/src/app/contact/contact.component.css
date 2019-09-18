@@ -1,0 +1,51 @@
+.container-fluid{
+  margin-top: -25px;
+  margin-bottom: 40px;
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.774);
+}
+
+@media screen and (min-width: 768px){
+  .title{
+    font-size: 35px;
+    color:rgba(0, 0, 0, 0.623);
+  }
+  .sub-title{
+    font-weight: lighter;
+    color:rgba(165, 42, 42, 0.952);
+  }
+  .link{
+    margin-left: 70px;
+  }
+  .git-link{
+    margin-left:92px;
+  }
+
+}
+@media screen and (max-width: 768px){
+  .title{
+    font-size: 20px;
+    color:rgba(0, 0, 0, 0.623);
+  }
+  .sub-title{
+    font-weight: lighter;
+    color:rgba(165, 42, 42, 0.952);
+  }
+  .link{
+    margin-left: 20px;
+  }
+  .git-link{
+    margin-left:42px;
+  }
+
+}
+.link, a{
+  color: brown;
+}
+i{
+  margin-right: 5px;
+  font-size: 20px;
+}
+.github {
+  margin-top: 50px;
+}

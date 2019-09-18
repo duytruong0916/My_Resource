@@ -23,8 +23,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.isLoggedIn = isAuthenticated;
     })
     this.authListenerSubs = this.authservice.getAuthNameListener().subscribe(lastname => {
-      if(lastname)
+      if(lastname){
       this.user_lastname = lastname.toUpperCase();
+      console.log(this.user_lastname)
+      }
       else
       this.user_lastname ='unknown'
     })

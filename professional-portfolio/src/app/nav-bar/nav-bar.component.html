@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
-  <div class="navbar_brand mt-lg-5 mt-3" [class.display] = "ishome" [routerLink]="['/home']" (click)="ishome=true" >
+  <div class="navbar_brand mt-lg-4 mt-3" [class.display] = "ishome" [routerLink]="['/home']" (click)="ishome=true; selectid='home'" >
     <img src="\assets\profile1.jpg">
     <div class="name mt-3">DUY TRUONG</div>
     <div class="field ">FRONT-END WEB DEVELOPER</div>
@@ -18,13 +18,31 @@
   </div>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <hr class="d-lg-none">
-    <div class="navbar-nav mt-lg-3 d-block">
-      <div class="item mt-4 mt-lg-2 ml-lg-4" [routerLink]="['/portfolio']" routerLinkActive="active-link" (click)="ishome=false" >PORTFOLIO</div>
-      <div class="item mt-4 mt-lg-2  ml-lg-4" [routerLink]="['/offer']" routerLinkActive="active-link" (click)="ishome=false">MY OFFER</div>
-      <div class="item mt-4 mt-lg-2  ml-lg-4" [routerLink]="['/contact']" routerLinkActive="active-link"(click)="ishome=false" >CONTACT ME</div>
-      <div class="item mt-lg-5 mt-4  ml-lg-4" [routerLink]="['/article']" routerLinkActive="active-link" (click)="ishome=false" >MY ARTICLES</div>
-      <div class="item mt-4 mt-lg-2  ml-lg-4" [routerLink]="['/picture']" routerLinkActive="active-link" (click)="ishome=false" >MY PICTURES</div>
-      <div class="item mt-4 mt-lg-2  ml-lg-4" [routerLink]="['/resume']" routerLinkActive="active-link"  (click)="ishome=false">MY RESUME</div>
+    <div class="navbar-nav mt-lg-3 d-block w-100">
+      <div class="item mt-4 mt-lg-2 ml-lg-4"  [routerLink]="['/portfolio']" routerLinkActive="active-link" (click)="onClick(portfolio.id)">PORTFOLIO
+        <span #portfolio id="portfolio" [class.display-arrow]="(selectid=='portfolio')?false:true" class="arrow"><i class="fa fa fa-play"></i>
+        </span>
+      </div>
+      <div class="item mt-4 mt-lg-2  ml-lg-4" [routerLink]="['/offer']" routerLinkActive="active-link" (click)="onClick(offer.id)">MY OFFER
+        <span #offer id="offer"[class.display-arrow]="(selectid=='offer')?false:true" class="arrow"><i class="fa fa fa-play"></i>
+        </span>
+      </div>
+      <div class="item mt-4 mt-lg-2  ml-lg-4" [routerLink]="['/contact']" routerLinkActive="active-link"(click)="onClick(contact.id)" >CONTACT ME
+        <span #contact id="contact"[class.display-arrow]="(selectid=='contact')?false:true" class="arrow"><i class="fa fa fa-play"></i>
+        </span>
+      </div>
+      <div class="item mt-lg-5 mt-4  ml-lg-4" [routerLink]="['/article']" routerLinkActive="active-link" (click)="onClick(article.id)" >MY ARTICLES
+        <span #article id="article"[class.display-arrow]="(selectid=='article')?false:true" class="arrow"><i class="fa fa fa-play"></i>
+        </span>
+      </div>
+      <div class="item mt-4 mt-lg-2  ml-lg-4" [routerLink]="['/picture']" routerLinkActive="active-link" (click)="onClick(picture.id)" >MY PICTURES
+        <span #picture id="picture"[class.display-arrow]="(selectid=='picture')?false:true" class="arrow"><i class="fa fa fa-play"></i>
+        </span>
+      </div>
+      <div class="item mt-4 mt-lg-2 ml-lg-4" [routerLink]="['/resume']" routerLinkActive="active-link"  (click)="onClick(resume.id)">MY RESUME
+        <span #resume id="resume"[class.display-arrow]="(selectid=='resume')?false:true" class="arrow"><i class="fa fa fa-play"></i>
+        </span>
+      </div>
     </div>
   </div>
   <div class="mt-4 mt-lg-5 ml-lg-4 d-none d-lg-block small">
@@ -32,7 +50,7 @@
     <span class="mt-2"><a href="mailto:duytruong169@gmail.com"><i class="fa fa-envelope icon"></i></a></span>
     <span class ="ml-3"><a href="https://github.com/duytruong0916"><i class="fa fa-github icon" ></i></a></span>
     <span class ="ml-3"><a href="https://www.facebook.com/nhatduy.truong.90"><i class="fa fa-facebook icon"></i></a></span>
-    <span class ="ml-3"><i class="fa fa-instagram icon"></i></span>
+    <span class ="ml-3"><a href="https://www.instagram.com/nhatduy.truong.90/"><i class="fa fa-instagram icon"></i></a></span>
   </div>
 </nav>
 <br>

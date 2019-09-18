@@ -62,16 +62,18 @@ hr {
 }
 .item{
   width:100%;
-  color: rgb(187, 173, 173);
+  color: rgb(155, 142, 142);
   font-size: 14px;
   font-weight: light;
   pointer-events: unset;
   outline: none;
+  margin-bottom: 20px;
 }
 .item:hover{
   color: white;
-  font-size: 18px;
+  font-size: 14.5px;
   cursor: pointer;
+  opacity: 1 !important;
 
 }
 i{
@@ -81,9 +83,8 @@ i{
 }
 .active-link{
   color: white;
-  font-size: 18px;
+  font-size: 14.5px;
   font-weight: 500;
-
 }
 .contact{
   color: rgb(187, 173, 173);
@@ -91,4 +92,19 @@ i{
 i:hover{
   color: white;
   cursor: pointer;
+  font-size: 20.5px;
+}
+.arrow{
+  margin-right:5px;
+  float:right;
+  color: white;
+  transform: rotate(180deg);
+}
+
+.display-arrow
+{
+  display: none;
+}
+.fa-play{
+  color: white;
 }

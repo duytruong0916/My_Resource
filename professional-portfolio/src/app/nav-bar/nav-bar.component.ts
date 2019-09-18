@@ -7,13 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
   ishome:boolean = false;
-  istoggled:boolean = false;
+  isclicked:boolean = false;
+  selectid:string;
   constructor() { }
 
   ngOnInit() {
   }
-  toggleMenu(){
-    this.istoggled = !this.istoggled;
+  onClick(id){
+    this.ishome = false;
+    this.selectid = id;
   }
 
 }

@@ -1,64 +1,61 @@
 @media screen and (max-width: 768px) {
-  mat-expansion-panel{
-    width: 100%;
+  .fa-star,
+  .fa-bars {
+    font-size: 40px;
+  }
+  .message {
+    font-size: 15px;
   }
 }
-  @media screen and (min-width: 768px) {
-    mat-expansion-panel{
-      width: 40%;
-    }
+@media screen and (min-width: 768px) {
+  .fa-star {
+    font-size: 60px;
   }
-mat-toolbar{
-  font-family: 'Montserrat', sans-serif;
+  .nav-item {
+    margin-left: 100px;
+    padding: 0px 10px;
+  }
+  .message {
+    font-size: 25px;
+  }
+}
+.navbar {
   background-color: black;
-  position: sticky;
+  height: auto;
 }
-span:hover{
-    cursor: pointer;
-  }
-.material-icons{
-  color: white;
-  font-size: 30px;
+.message {
+  font-style: italic;
+  color: green;
 }
-.option{
-  color: rgb(173, 164, 164);
+.nav-item {
+  color: rgba(255, 255, 255, 0.301);
   font-size: 15px;
-  margin: 5px 20px;
-  padding: 3px 15px;
   outline: none;
-}
-.option:hover{
-  color: white;
-  border-bottom: solid white 2px;
-  font-weight: bolder;
-  font-size: 18px;
-  font-size:18px;
-}
-.my-activelink{
-  color: white;
-  border-bottom: solid white 2px;
-  font-weight: bolder;
-  font-size: 18px;
-  text-decoration: none;
-  outline: none;
-
-}
-.my-activelink-1{
-  color: white;
-  font-weight: bolder;
-  outline: none;
-}
-.user-name{
-  color:white;
-}
-.Menu{
-  margin-top: -10px;
-  padding: 0;
-  text-align: center;
-  color:rgba(255, 255, 255, 0.568);
-  background-color: black !important;
-}
-.item{
-  background-color: black;
   padding: 10px;
+}
+
+.nav-item:hover {
+  color: white;
+  font-size: 15.5px;
+  cursor: pointer;
+}
+.active-link {
+  color: white;
+  font-size: 15px;
+}
+.fa-star {
+  animation: rotate 2s infinite;
+  color: green;
+}
+hr {
+  background-color: white;
+  color: white;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

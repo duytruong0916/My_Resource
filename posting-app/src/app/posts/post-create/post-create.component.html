@@ -1,6 +1,7 @@
-<div class= "form-card mx-auto">
+<div class="container-fluid">
+<div class= "form-card mx-auto" [class.view-height]="imagePreview.length==0">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form [formGroup]="form" *ngIf="!isLoading" class="mx-auto">
+  <form [formGroup]="form" *ngIf="!isLoading" class="mt-5">
     <mat-form-field>
       <textarea matInput rows="2" formControlName="title" placeholder="TITLE:"></textarea>
       <mat-error *ngIf="form.get('title').invalid">Enter a title</mat-error>
@@ -9,7 +10,7 @@
     <input type='file' #file_ (change)="onImageHandler($event)" accept="image/*" multiple>
     <div class="row ">
     <div class="col col-xl-4 col-6 mt-2 mt-md-2 text-center" *ngFor="let image of imagePreview; let i = index">
-      <img [src]="image" [alt]="form.value.title" class="mw-100" width="400" height= "200"
+      <img [src]="image" [alt]="form.value.title"
         *ngIf="imagePreview.length!==0&&imagePreview">
       <i class="material-icons float-right" (click)="onRemove(i)">clear</i>
     </div>
@@ -24,4 +25,4 @@
     </button>
   </form>
 </div>
-
+</div>

@@ -1,5 +1,7 @@
+<div class="container-fluid">
 <mat-card>
-  <h3>LOG IN</h3>
+  <h3 class="d-md-block d-none mt-4">Time To Log In!</h3>
+  <h3 class="d-md-none d-block mt-4">Log In!</h3>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form [formGroup]="form" *ngIf="!isLoading">
     <mat-form-field>
@@ -20,6 +22,6 @@
         class="button-create  mt-3 bg-dark text-white">CREATE AN ACCOUNT
       </button>
     </div>
-
   </form>
 </mat-card>
+</div>
