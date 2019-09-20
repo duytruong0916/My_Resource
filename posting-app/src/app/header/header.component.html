@@ -1,9 +1,11 @@
-<nav class="navbar navbar-expand-md ">
+<nav class="navbar navbar-expand-lg">
   <!-- Brand -->
-  <div class="navbar-brand"><span class="fa fa-star checked"></span></div>
+  <div class="navbar-brand" [routerLink]="['/home']" routerLinkActive="active-link" >
+    <span class="fa fa-star checked"></span>
+    <span class="message ml-4"*ngIf="!isLoggedIn">Welcome Back!</span>
+    <span class="message ml-4" *ngIf="isLoggedIn">Hello {{user_lastname}}!</span>
+  </div>
   <!-- Toggler/collapsibe Button -->
-  <div class="message  float-left"*ngIf="!isLoggedIn">Welcome Back!</div>
-  <div class="message float-left" *ngIf="isLoggedIn">Hello {{user_lastname}}!</div>
   <div class="navbar-toggler" data-toggle="collapse" data-target="#collapsibleNavbar">
       <i class="fa fa-bars" aria-hidden="true"></i>
   </div>

@@ -1,23 +1,27 @@
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 990x) {
   .fa-star,
   .fa-bars {
     font-size: 40px;
   }
   .message {
-    font-size: 15px;
+    font-size: 25px;
   }
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 990px) {
   .fa-star {
     font-size: 60px;
   }
   .nav-item {
-    margin-left: 100px;
+    margin-left: 70px;
     padding: 0px 10px;
   }
   .message {
     font-size: 25px;
   }
+}
+.navbar-brand{
+  outline: none;
+  cursor: pointer;
 }
 .navbar {
   background-color: black;
@@ -25,27 +29,27 @@
 }
 .message {
   font-style: italic;
-  color: green;
+  color: rgb(197, 126, 45);
 }
 .nav-item {
   color: rgba(255, 255, 255, 0.301);
-  font-size: 15px;
+  font-size: 18px;
   outline: none;
   padding: 10px;
 }
 
 .nav-item:hover {
   color: white;
-  font-size: 15.5px;
+  font-size: 18.5px;
   cursor: pointer;
 }
 .active-link {
   color: white;
-  font-size: 15px;
+  font-size: 18.5px;
 }
 .fa-star {
   animation: rotate 2s infinite;
-  color: green;
+  color: rgb(99, 99, 189);
 }
 hr {
   background-color: white;

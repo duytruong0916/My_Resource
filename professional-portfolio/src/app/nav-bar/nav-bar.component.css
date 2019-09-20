@@ -63,7 +63,7 @@ hr {
 .item{
   width:100%;
   color: rgb(155, 142, 142);
-  font-size: 14px;
+  font-size: 17px;
   font-weight: light;
   pointer-events: unset;
   outline: none;
@@ -71,23 +71,24 @@ hr {
 }
 .item:hover{
   color: white;
-  font-size: 14.5px;
+  font-size: 17.5px;
   cursor: pointer;
   opacity: 1 !important;
 
 }
 i{
-  font-size: 20px;
+  font-size: 25px;
   margin-top: 10px;
   color: rgb(187, 173, 173);
 }
 .active-link{
   color: white;
-  font-size: 14.5px;
+  font-size: 17px;
   font-weight: 500;
 }
 .contact{
   color: rgb(187, 173, 173);
+  margin-top: 50px;
 }
 i:hover{
   color: white;
