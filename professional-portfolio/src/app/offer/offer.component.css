@@ -11,6 +11,7 @@
     padding-left: 65px;
     float: left;
     width: 85%;
+    font-size: 19px;
   }
   .title{
     font-size: 40px;
@@ -42,4 +43,7 @@
 .italic{
   font-style: italic;
   font-size: 20px;
+}
+hr{
+  background-color: black;
 }

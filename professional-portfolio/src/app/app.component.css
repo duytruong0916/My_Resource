@@ -3,7 +3,7 @@
     width: 100%;
   }
 }
-@media screen and (min-width: 990px){
+@media screen and (min-width:990px){
   main{
     width: 76%;
     margin-left: 24%;
