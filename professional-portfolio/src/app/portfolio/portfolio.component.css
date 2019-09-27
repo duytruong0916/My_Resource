@@ -1,5 +1,8 @@
-img{
+.image1{
   width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url('../../assets/images/home.png');
 }
 .timeline-item{
   font-size: 19px;
@@ -32,7 +35,10 @@ img{
   .timeline-item{
     position: relative;
   }
-
+  .image1{
+    width: 100%;
+    height: 220px;
+  }
   .timeline-body::before{
     content: '';
     position: absolute;
@@ -69,5 +75,28 @@ img{
 }
 @media screen and (max-width: 990px)
 {
-
+  .button-link{
+    color: white;
+    width: 45%;
+    text-align: center;
+    padding:10px 10px;
+    background-color:  rgb(26, 72, 99);
+  }
+  .image1{
+    width: 100%;
+    height: 200px;
+  }
+}
+.last{
+  margin-bottom: 50px;
+}
+.techs{
+  color: white;
+  text-align: center;
+  margin: 10px;
+  padding:10px 10px;
+  background-color:  rgb(84, 133, 161);
+}
+.button-link:hover , .techs:hover{
+  cursor: pointer;
 }

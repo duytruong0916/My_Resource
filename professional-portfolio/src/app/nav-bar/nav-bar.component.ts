@@ -1,21 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  ishome:boolean = false;
-  isclicked:boolean = false;
-  selectid:string;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
-  }
-  onClick(id){
-    this.ishome = false;
-    this.selectid = id;
   }
 
 }

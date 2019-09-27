@@ -1,52 +1,53 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
-  <div class="navbar_brand mt-lg-4 mt-3" [class.display] = "ishome" [routerLink]="['/home']" (click)="ishome=true; selectid='home'" >
-    <img src="\assets\profile1.jpg">
+  <div class="navbar_brand mt-lg-4" [routerLink]="['/home']" routerLinkActive="display">
+    <div class="profile_image"></div>
     <div class="name mt-3">DUY TRUONG</div>
     <div class="field ">FRONT-END WEB DEVELOPER</div>
+    <hr>
   </div>
-  <hr [class.display] = "ishome">
   <div class="menu d-flex">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler"type="button" data-toggle="collapse" data-target="#collapsibleNavbar" #menu>
+        <i class="fa fa-bars"></i>
     </button>
     <div class="d-lg-none d-flex ml-auto">
-      <span class ="ml-3"><i class="fa fa-envelope"></i></span>
-      <span class ="ml-3"><i class="fa fa-github" ></i></span>
-      <span class ="ml-3"><i class="fa fa-facebook"></i></span>
-      <span class ="ml-3"><i class="fa fa-instagram"></i></span>
+        <span class="ml-3"><a href="mailto:duytruong169@gmail.com" target="_blank"><i class="fa fa-envelope icon"></i></a></span>
+        <span class ="ml-3"><a href="https://github.com/duytruong0916" target="_blank"><i class="fa fa-github icon" ></i></a></span>
+        <span class ="ml-3"><a href="https://www.facebook.com/nhatduy.truong.90" target="_blank"><i class="fa fa-facebook icon"></i></a></span>
+        <span class ="ml-3"><a href="https://www.instagram.com/nhatduy.truong.90/" target="_blank"><i class="fa fa-instagram icon"></i></a></span>
     </div>
   </div>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <hr class="d-lg-none">
-    <div class="navbar-nav mt-lg-3 d-block w-100">
-      <div class="item mt-4 mt-lg-2 ml-lg-4"  [routerLink]="['/portfolio']" routerLinkActive="active-link" (click)="onClick(portfolio.id)">PORTFOLIO
-        <span #portfolio id="portfolio" [class.display-arrow]="(selectid=='portfolio')?false:true" class="arrow"><i class="fa fa fa-play"></i>
-        </span>
+    <div class="navbar-nav mt-lg-3 d-lg-block d-none w-100">
+      <div class="item mt-4 mt-lg-2 ml-lg-4"  [routerLink]="['/portfolio']" routerLinkActive="active-link">PORTFOLIO
+        <span  [routerLink]="['/portfolio']" routerLinkActive="display-arrow" class="arrow"><i class="fa fa fa-play"></i></span>
       </div>
-      <div class="item mt-4 mt-lg-2  ml-lg-4" [routerLink]="['/offer']" routerLinkActive="active-link" (click)="onClick(offer.id)">MY OFFER
-        <span #offer id="offer"[class.display-arrow]="(selectid=='offer')?false:true" class="arrow"><i class="fa fa fa-play"></i>
-        </span>
+      <div class="item mt-4 mt-lg-2 ml-lg-4" [routerLink]="['/offer']" routerLinkActive="active-link" >MY OFFER
+        <span [routerLink]="['/offer']"  routerLinkActive="display-arrow" class="arrow"><i class="fa fa fa-play"></i> </span>
       </div>
-      <div class="item mt-4 mt-lg-2  ml-lg-4" [routerLink]="['/contact']" routerLinkActive="active-link"(click)="onClick(contact.id)" >CONTACT ME
-        <span #contact id="contact"[class.display-arrow]="(selectid=='contact')?false:true" class="arrow"><i class="fa fa fa-play"></i>
-        </span>
+      <div class="item mt-4 mt-lg-2  ml-lg-4" [routerLink]="['/contact']" routerLinkActive="active-link">CONTACT ME
+        <span [routerLink]="['/contact']"  routerLinkActive="display-arrow" class="arrow"><i class="fa fa fa-play"></i> </span>
       </div>
-      <div class="item mt-4 mt-lg-5  ml-lg-4" [routerLink]="['/picture']" routerLinkActive="active-link" (click)="onClick(picture.id)" >MY PICTURES
-        <span #picture id="picture"[class.display-arrow]="(selectid=='picture')?false:true" class="arrow"><i class="fa fa fa-play"></i>
-        </span>
-      </div>
-      <div class="item mt-4 mt-lg-2 ml-lg-4" [routerLink]="['/resume']" routerLinkActive="active-link"  (click)="onClick(resume.id)">MY RESUME
-        <span #resume id="resume"[class.display-arrow]="(selectid=='resume')?false:true" class="arrow"><i class="fa fa fa-play"></i>
-        </span>
+      <div class="item mt-4 mt-lg-2 ml-lg-4" [routerLink]="['/resume']" routerLinkActive="active-link"  >MY RESUME
+        <span [routerLink]="['/resume']" routerLinkActive="display-arrow" class="arrow"><i class="fa fa fa-play"></i> </span>
       </div>
     </div>
+    <div class="navbar-nav mt-lg-3 d-lg-none d-block w-100">
+        <div class="item mt-4 mt-lg-2 ml-lg-4"  [routerLink]="['/portfolio']" routerLinkActive="active-link" (click)="menu.click()">PORTFOLIO</div>
+        <div class="item mt-4 mt-lg-2  ml-lg-4" [routerLink]="['/offer']" routerLinkActive="active-link" (click)="menu.click()">MY OFFER
+        </div>
+        <div class="item mt-4 mt-lg-2  ml-lg-4" [routerLink]="['/contact']" routerLinkActive="active-link"(click)="menu.click()" >CONTACT ME
+        </div>
+        <div class="item mt-4 mt-lg-2 ml-lg-4" [routerLink]="['/resume']" routerLinkActive="active-link"  (click)="menu.click()">MY RESUME
+        </div>
+      </div>
   </div>
-  <div class="mt-4 mt-lg-5 ml-lg-4 d-none d-lg-block small ">
+  <div class="mt-4 mt-lg-5 ml-lg-4 d-none d-lg-block last">
     <div class="contact">Get In Touch</div>
-    <span class="mt-2"><a href="mailto:duytruong169@gmail.com"><i class="fa fa-envelope icon"></i></a></span>
-    <span class ="ml-3"><a href="https://github.com/duytruong0916"><i class="fa fa-github icon" ></i></a></span>
-    <span class ="ml-3"><a href="https://www.facebook.com/nhatduy.truong.90"><i class="fa fa-facebook icon"></i></a></span>
-    <span class ="ml-3"><a href="https://www.instagram.com/nhatduy.truong.90/"><i class="fa fa-instagram icon"></i></a></span>
+    <span class= "mt-2"><a href="mailto:duytruong169@gmail.com" target="_blank"><i class="fa fa-envelope icon mt-2"></i></a></span>
+    <span class ="ml-3"><a href="https://github.com/duytruong0916" target="_blank"><i class="fa fa-github icon" ></i></a></span>
+    <span class ="ml-3"><a href="https://www.facebook.com/nhatduy.truong.90" target="_blank"><i class="fa fa-facebook icon"></i></a></span>
+    <span class ="ml-3"><a href="https://www.instagram.com/nhatduy.truong.90/" target="_blank"><i class="fa fa-instagram icon"></i></a></span>
   </div>
 </nav>
 <br>

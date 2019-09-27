@@ -3,40 +3,42 @@
   margin-bottom: 40px;
   height: auto;
   background-color: rgba(255, 255, 255, 0.774);
-  font-size: 19px;
+  font-size: 16px;
+  padding-bottom: 120px;
 }
 
 @media screen and (min-width: 768px){
   .title{
+    margin-top: 40px;
     font-size: 35px;
     color:rgba(0, 0, 0, 0.623);
   }
   .sub-title{
     font-weight: lighter;
-    color:rgba(165, 42, 42, 0.952);
+    font-size: 20px;
   }
-  .link{
-    margin-left: 70px;
+  .git{
+    margin-top: 50px;
   }
-  .git-link{
-    margin-left:92px;
+  .email, .fb,.last{
+    margin-top: 10px;
   }
 
 }
 @media screen and (max-width: 768px){
   .title{
-    font-size: 20px;
+    margin-top: 20px;
+    font-size: 35px;
     color:rgba(0, 0, 0, 0.623);
   }
   .sub-title{
     font-weight: lighter;
-    color:rgba(165, 42, 42, 0.952);
   }
-  .link{
-    margin-left: 20px;
+  .git{
+    margin-top: 30px;
   }
-  .git-link{
-    margin-left:42px;
+  .email, .fb,.last{
+    margin-top: 10px;
   }
 
 }

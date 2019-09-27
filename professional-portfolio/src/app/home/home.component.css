@@ -1,17 +1,36 @@
 .container-fluid
  {
+  padding-top:50px;
   margin-top: -25px;
   height: 100vh;
   background-size: cover;
-  background-image: url("src\assets\home.jpg");
+  background-image: url("../../assets/home.jpg");
+}
+.hello-message-1{
+  width: 6em;
+  -webkit-animation: blinktextcurser 1s steps(50) 2 normal, typewriter 1.5s steps(30) 0.5s 1 normal both;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.hello-message-2{
+  width: 15em;
+  -webkit-animation:  blinktextcurser 1s steps(50) 2 2s normal, typewriter2 2s steps(30) 2s 1 normal both;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.hello-message-3{
+  width: 12em;
+  -webkit-animation:blinktextcurser 1s steps(50) infinite 4s normal, typewriter3 2s steps(30) 4s 1 normal both;
+  overflow: hidden;
+  white-space: nowrap;
 }
 @media screen and (min-width: 768px)
 {
   .hello-message-1{
     font-size: 50px;
-    padding-top: 70px;
     padding-left: 50px;
   }
+
   .hello-message-2{
     font-size: 35px;
     padding-left: 50px;
@@ -29,12 +48,12 @@
   .button-link{
     margin-left: 50px;
   }
+
 }
 @media screen and (max-width: 768px)
 {
   .hello-message-1{
     font-size: 25px;
-    padding-top: 50px;
     padding-left: 20px;
   }
   .hello-message-2{
@@ -85,5 +104,40 @@
   to{
     opacity: 1;
     width:200px;
+  }
+}
+@keyframes typewriter{
+  from {
+    width: 0px;
+  }
+  to
+  {
+    width: 6em;
+  }
+}
+@keyframes typewriter2{
+  from {
+    width: 0px;
+  }
+  to
+  {
+    width: 15em;
+  }
+}
+@keyframes typewriter3{
+  from {
+    width: 0px;
+  }
+  to
+  {
+    width: 12em;
+  }
+}
+@keyframes blinktextcurser{
+  from {
+     border-right: 0px;
+  }
+  to{
+    border-right: 1px solid white ;
   }
 }

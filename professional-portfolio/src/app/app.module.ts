@@ -14,6 +14,7 @@ import { ResumeComponent } from './resume/resume.component';
 import { PictureComponent } from './picture/picture.component';
 import { ArticleComponent } from './article/article.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { AppService } from './app.service';
 
 @NgModule({
   declarations: [
@@ -32,9 +33,9 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
